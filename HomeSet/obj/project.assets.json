@@ -12542,9 +12542,9 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "E:\\git\\homeset\\HomeSet\\HomeSet.csproj",
-      "projectName": "HomeSet",
-      "projectPath": "E:\\git\\homeset\\HomeSet\\HomeSet.csproj",
+      "projectUniqueName": "E:\\git\\homeset\\HomeSet\\HomeSet.Web.csproj",
+      "projectName": "HomeSet.Web",
+      "projectPath": "E:\\git\\homeset\\HomeSet\\HomeSet.Web.csproj",
       "packagesPath": "C:\\Users\\The_Rub\\.nuget\\packages\\",
       "outputPath": "E:\\git\\homeset\\HomeSet\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,0 +1,6 @@
+E:\git\homeset\HomeSet.Repositorio\bin\Debug\netcoreapp2.0\HomeSet.Repositorio.deps.json
+E:\git\homeset\HomeSet.Repositorio\bin\Debug\netcoreapp2.0\HomeSet.Repositorio.dll
+E:\git\homeset\HomeSet.Repositorio\obj\Debug\netcoreapp2.0\HomeSet.Repositorio.csprojResolveAssemblyReference.cache
+E:\git\homeset\HomeSet.Repositorio\obj\Debug\netcoreapp2.0\HomeSet.Repositorio.csproj.CoreCompileInputs.cache
+E:\git\homeset\HomeSet.Repositorio\obj\Debug\netcoreapp2.0\HomeSet.Repositorio.AssemblyInfoInputs.cache
+E:\git\homeset\HomeSet.Repositorio\obj\Debug\netcoreapp2.0\HomeSet.Repositorio.AssemblyInfo.cs

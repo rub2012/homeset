@@ -1,0 +1,10 @@
+E:\git\homeset\HomeSet\obj\Debug\netcoreapp2.0\HomeSet.Web.csproj.CoreCompileInputs.cache
+E:\git\homeset\HomeSet\obj\Debug\netcoreapp2.0\HomeSet.Web.AssemblyInfoInputs.cache
+E:\git\homeset\HomeSet\obj\Debug\netcoreapp2.0\HomeSet.Web.AssemblyInfo.cs
+E:\git\homeset\HomeSet\bin\Debug\netcoreapp2.0\HomeSet.Web.deps.json
+E:\git\homeset\HomeSet\bin\Debug\netcoreapp2.0\HomeSet.Web.runtimeconfig.json
+E:\git\homeset\HomeSet\bin\Debug\netcoreapp2.0\HomeSet.Web.runtimeconfig.dev.json
+E:\git\homeset\HomeSet\bin\Debug\netcoreapp2.0\HomeSet.Web.dll
+E:\git\homeset\HomeSet\bin\Debug\netcoreapp2.0\HomeSet.Web.pdb
+E:\git\homeset\HomeSet\obj\Debug\netcoreapp2.0\HomeSet.Web.dll
+E:\git\homeset\HomeSet\obj\Debug\netcoreapp2.0\HomeSet.Web.pdb
