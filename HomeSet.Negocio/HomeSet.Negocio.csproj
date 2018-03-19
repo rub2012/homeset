@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HomeSet.Domain\HomeSet.Domain.csproj" />
+    <ProjectReference Include="..\HomeSet.Repositorio\HomeSet.Repositorio.csproj" />
+  </ItemGroup>
+
 </Project>
