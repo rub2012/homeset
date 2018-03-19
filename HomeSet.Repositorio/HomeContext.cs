@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HomeSet.Domain.Entidades;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
+using System.Configuration;
+using System.Linq;
 
 namespace HomeSet.Repositorio
 {
-    public class HomeContext : DbContext
+    public class HomeContext : DbContext , IRepositorio
     {
 
         public HomeContext()
@@ -13,7 +17,47 @@ namespace HomeSet.Repositorio
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL("server=localhost;database=library;user=user;password=password");
+            optionsBuilder.UseMySQL(ConfigurationManager.ConnectionStrings["MysqlDB"].ConnectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // No usamos nombres de tablas en plural. Igualmente la pluralización fucniona solo con nombres en ingles.
+
+            //Se mapean todas las entidades bajo el namespace Molinos.Scato.Dominio.Entidades      
+            MapearAssemblyDe<Evento>(modelBuilder, x => x.Namespace == typeof(Evento).Namespace, excluir: null);
+           
+        }
+
+        public int GuardarCambios()
+        {
+            return SaveChanges();
+        }
+
+        public TEntity Obtener<TEntity>(object id) where TEntity : class
+        {
+            return Find<TEntity>(id);
+            //return Set<TEntity>().Find(id);
+        }
+
+        public EntityEntry<TEntity> Agregar<TEntity>(TEntity entidad) where TEntity : class
+        {
+            return Add(entidad);
+        }
+
+        public EntityEntry<TEntity> Remover<TEntity>(object id) where TEntity : class
+        {
+            return Remover(Obtener<TEntity>(id));
+        }
+
+        public EntityEntry<TEntity> Remover<TEntity>(TEntity entidad) where TEntity : class
+        {
+            return Remove(entidad);
+        }
+
+        public EntityEntry<TEntity> Actualizar<TEntity>(TEntity entidad) where TEntity : class
+        {
+            return Update(entidad);
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder);
@@ -54,5 +98,21 @@ namespace HomeSet.Repositorio
         //    services.AddDbContext<BloggingContext>(options =>
         //        options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
         //}
+
+        private void MapearAssemblyDe<TEntidad>(ModelBuilder modelBuilder, Predicate<Type> incluir, Predicate<Type> excluir)
+        {
+            var tiposEntidades = typeof(TEntidad).Assembly.GetTypes()
+                .Where(x => incluir(x));
+            if (excluir != null)
+            {
+                tiposEntidades = tiposEntidades.Where(x => !excluir(x));
+            }
+
+            var metodo = modelBuilder.GetType().GetMethod("Entity");
+            foreach (var tipoEntidad in tiposEntidades)
+            {
+                metodo.MakeGenericMethod(tipoEntidad).Invoke(modelBuilder, null);
+            }
+        }
     }
 }
