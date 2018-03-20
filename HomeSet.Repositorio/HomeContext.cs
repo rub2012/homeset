@@ -1,6 +1,7 @@
 ﻿using HomeSet.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Configuration;
 using System.Linq;
@@ -9,15 +10,15 @@ namespace HomeSet.Repositorio
 {
     public class HomeContext : DbContext , IRepositorio
     {
-
-        public HomeContext()
+        private readonly IConfiguration Configuration;
+        public HomeContext(IConfiguration config)
         {
-
+            Configuration = config;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(ConfigurationManager.ConnectionStrings["MysqlDB"].ConnectionString);
+            optionsBuilder.UseMySQL(Configuration["ConnectionStrings:MysqlDB"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -99,16 +100,17 @@ namespace HomeSet.Repositorio
         //        options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
         //}
 
-        private void MapearAssemblyDe<TEntidad>(ModelBuilder modelBuilder, Predicate<Type> incluir, Predicate<Type> excluir)
+        private void MapearAssemblyDe<TEntity>(ModelBuilder modelBuilder, Predicate<Type> incluir, Predicate<Type> excluir)
         {
-            var tiposEntidades = typeof(TEntidad).Assembly.GetTypes()
+            var tiposEntidades = typeof(TEntity).Assembly.GetTypes()
                 .Where(x => incluir(x));
             if (excluir != null)
             {
                 tiposEntidades = tiposEntidades.Where(x => !excluir(x));
             }
 
-            var metodo = modelBuilder.GetType().GetMethod("Entity");
+            var metodo = modelBuilder.GetType().GetMethods().FirstOrDefault(x => x.Name == "Entity");
+            //var metodo = modelBuilder.GetType().GetMethod()
             foreach (var tipoEntidad in tiposEntidades)
             {
                 metodo.MakeGenericMethod(tipoEntidad).Invoke(modelBuilder, null);

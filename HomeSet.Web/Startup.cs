@@ -1,4 +1,5 @@
-﻿using HomeSet.Repositorio;
+﻿using HomeSet.Negocio;
+using HomeSet.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ namespace HomeSet
         {
             services.AddMvc();
             services.AddScoped<IRepositorio, HomeContext>();
+            services.AddScoped<INegocio, Manager>();
             //services.AddDbContext<HomeContext>();
         }
 
@@ -37,7 +39,7 @@ namespace HomeSet
             }
 
             app.UseStaticFiles();
-
+            var s = Configuration["MyConfig"];
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

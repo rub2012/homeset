@@ -1,0 +1,13 @@
+﻿@model HomeSet.Domain.Dto.EventoDto
+@{
+    ViewData["Title"] = "Eventos";
+}
+
+<div id="main" class="">
+
+    <form asp-controller="Evento" asp-action="Alta" method="post">
+        Descripcion: <input asp-for="Descripcion" /><br />
+        <button type="submit">Guardar</button>
+    </form>
+
+</div>
