@@ -1,22 +1,25 @@
-﻿using HomeSet.Domain.Dto;
+﻿using AutoMapper;
+using HomeSet.Domain.Dto;
 using HomeSet.Domain.Entidades;
 using HomeSet.Repositorio;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HomeSet.Negocio
 {
     public class Manager : INegocio
     {
         private readonly IRepositorio Repositorio;
-        public Manager(IRepositorio repositorio)
+        private readonly IMapper Mapper;
+        public Manager(IRepositorio repositorio, IMapper mapper)
         {
             Repositorio = repositorio;
+            Mapper = mapper;
         }
         public int AltaEvento(EventoDto dto)
         {
-            var resultado = Repositorio.Agregar<Evento>(new Evento
-            {
-                Descripcion = dto.Descripcion
-            });
+            var entidad = Mapper.Map<EventoDto,Evento>(dto);
+            var resultado = Repositorio.Agregar(entidad);
             Repositorio.GuardarCambios();
             return 0;
 
@@ -37,6 +40,12 @@ namespace HomeSet.Negocio
             var evento = Repositorio.Obtener<Evento>(dto.Id);
             var resultado = Repositorio.Actualizar<Evento>(evento);
             Repositorio.GuardarCambios();
+        }
+
+        public IList<EventoDto> ListarEventos()
+        {
+            var s= Repositorio.Listar<Evento>().ToList();
+            return null;
         }
     }
 }

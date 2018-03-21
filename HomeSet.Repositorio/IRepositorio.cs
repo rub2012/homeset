@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace HomeSet.Repositorio
 {
@@ -15,6 +18,8 @@ namespace HomeSet.Repositorio
         EntityEntry<TEntity> Remover<TEntity>(TEntity entidad) where TEntity : class;
 
         EntityEntry<TEntity> Actualizar<TEntity>(TEntity entidad) where TEntity : class;
+
+        IEnumerable<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion = null, int? maxResultados = null) where TEntity : class;
 
 
 

@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace HomeSet.Repositorio
 {
@@ -60,6 +62,15 @@ namespace HomeSet.Repositorio
         {
             return Update(entidad);
         }
+
+        public IEnumerable<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion = null, int? maxResultados = null) where TEntity : class
+        {
+            IQueryable<TEntity> resultado = Set<TEntity>();
+            if (condicion != null)
+            {
+                resultado = resultado.Where(condicion);
+            }
+            return maxResultados.HasValue ? resultado.Take(maxResultados.Value) : resultado;        }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder);
         //{
