@@ -18,7 +18,7 @@ namespace HomeSet.Negocio
         }
         public int AltaEvento(EventoDto dto)
         {
-            var entidad = Mapper.Map<EventoDto,Evento>(dto);
+            var entidad = Mapper.Map<Evento>(dto);
             var resultado = Repositorio.Agregar(entidad);
             Repositorio.GuardarCambios();
             return 0;
@@ -27,25 +27,22 @@ namespace HomeSet.Negocio
 
         public void BajaEvento(EventoDto dto)
         {
-            var resultado = Repositorio.Remover<Evento>(new Evento
-            {
-                Id = dto.Id,
-                Descripcion = dto.Descripcion
-            });
+            var resultado = Repositorio.Remover<Evento>(dto.Id);
             Repositorio.GuardarCambios();
         }
 
         public void ModificacionEvento(EventoDto dto)
         {
-            var evento = Repositorio.Obtener<Evento>(dto.Id);
-            var resultado = Repositorio.Actualizar<Evento>(evento);
+            var entidad = Mapper.Map<EventoDto, Evento>(dto);
+            //var evento = Repositorio.Obtener<Evento>(dto.Id);
+            var resultado = Repositorio.Actualizar(entidad);
             Repositorio.GuardarCambios();
         }
 
         public IList<EventoDto> ListarEventos()
         {
-            var s= Repositorio.Listar<Evento>().ToList();
-            return null;
+            var eventos = Repositorio.Listar<Evento>();
+            return Mapper.Map<IEnumerable<EventoDto>>(eventos).ToList();
         }
     }
 }
