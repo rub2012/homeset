@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HomeSet.Domain;
 using HomeSet.Domain.Dto;
 using HomeSet.Domain.Entidades;
 using HomeSet.Repositorio;
@@ -16,24 +17,24 @@ namespace HomeSet.Negocio
             Repositorio = repositorio;
             Mapper = mapper;
         }
-        public int AltaEvento(EventoDto dto)
+        public int Alta<TEntity,TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class
         {
-            var entidad = Mapper.Map<Evento>(dto);
+            var entidad = Mapper.Map<TEntity>(dto);
             var resultado = Repositorio.Agregar(entidad);
             Repositorio.GuardarCambios();
             return 0;
 
         }
 
-        public void BajaEvento(EventoDto dto)
+        public void Baja<TEntity>(int id) where TEntity : class
         {
-            var resultado = Repositorio.Remover<Evento>(dto.Id);
+            var resultado = Repositorio.Remover<TEntity>(id);
             Repositorio.GuardarCambios();
         }
 
-        public void ModificacionEvento(EventoDto dto)
+        public void Modificacion<TEntity, TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class
         {
-            var entidad = Mapper.Map<EventoDto, Evento>(dto);
+            var entidad = Mapper.Map<TEntityDto, TEntity>(dto);
             //var evento = Repositorio.Obtener<Evento>(dto.Id);
             var resultado = Repositorio.Actualizar(entidad);
             Repositorio.GuardarCambios();

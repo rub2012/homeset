@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using HomeSet.Models;
 using HomeSet.Negocio;
 using HomeSet.Domain.Dto;
+using HomeSet.Domain.Entidades;
 
 namespace HomeSet.Controllers
 {
@@ -24,7 +25,7 @@ namespace HomeSet.Controllers
         [HttpPost]
         public IActionResult Alta(EventoDto dto)
         {
-            Negocio.AltaEvento(dto);
+            Negocio.Alta<Evento,EventoDto>(dto);
             return RedirectToAction("Index", "Home");
         }
 
