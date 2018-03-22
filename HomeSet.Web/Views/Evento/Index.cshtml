@@ -1,45 +1,22 @@
-﻿@model HomeSet.Domain.Dto.EventoDto
-@{
+﻿@{
     ViewData["Title"] = "Eventos";
 }
 
 <div id="main" class="">
-
-    <form asp-controller="Evento" asp-action="Alta" method="post">
-        Descripcion: <input asp-for="Descripcion" /><br />
-        <button class="btn btn-primary" type="submit">Guardar</button>
-
+    @*data-ajax-loading="#divloading"
+        data-ajax-success="Success"
+        data-ajax-failure="Failure"*@
+    <form asp-controller="Evento" asp-action="Listar"
+          data-ajax="true"
+          data-ajax-method="GET"
+          data-ajax-mode="replace"
+          data-ajax-update="#gridTabla">
+        @Html.Label("Filtro") <input type="text" name="filtro" class="input-large" />
+        <button class="btn btn-primary" type="submit">Filtrar</button>
     </form>
 
-    @*<table class="table table-sm table-responsive-sm table-striped table-bordered table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@@twitter</td>
-            </tr>
-        </tbody>
-    </table>*@
+    <div id="gridTabla">
+        @await Html.PartialAsync("Listar", ViewData)
+    </div>
 
 </div>

@@ -1,4 +1,5 @@
-﻿using HomeSet.Domain.Entidades;
+﻿using HomeSet.Domain;
+using HomeSet.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
@@ -70,7 +71,32 @@ namespace HomeSet.Repositorio
             {
                 resultado = resultado.Where(condicion);
             }
-            return maxResultados.HasValue ? resultado.Take(maxResultados.Value) : resultado;        }
+            return maxResultados.HasValue ? resultado.Take(maxResultados.Value) : resultado;
+        }
+
+        public ListaPaginada<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion, Paginacion paginacion) where TEntity : class
+        {
+            IQueryable<TEntity> resultados = Set<TEntity>();
+            if (condicion != null)
+            {
+                resultados = resultados.Where(condicion);
+            }
+
+            int itemsTotales = resultados.Count();
+
+            if (paginacion.OrdenarPor != null)
+            {
+                var selectorOrden = Expresiones.Propiedad<TEntity>(paginacion.OrdenarPor);
+                resultados = paginacion.DireccionOrden == DirOrden.Asc
+                                 ? resultados.OrderBy(selectorOrden)
+                                 : resultados.OrderByDescending(selectorOrden);
+            }
+
+
+            resultados = resultados.Skip((paginacion.Pagina - 1) * paginacion.ItemsPorPagina).Take(paginacion.ItemsPorPagina);
+
+            return new ListaPaginada<TEntity>(resultados.ToList(), paginacion.Pagina, paginacion.ItemsPorPagina, itemsTotales);
+        }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder);
         //{

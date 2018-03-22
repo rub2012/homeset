@@ -3,8 +3,10 @@ using HomeSet.Domain;
 using HomeSet.Domain.Dto;
 using HomeSet.Domain.Entidades;
 using HomeSet.Repositorio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace HomeSet.Negocio
 {
@@ -44,6 +46,24 @@ namespace HomeSet.Negocio
         {
             var eventos = Repositorio.Listar<Evento>();
             return Mapper.Map<IEnumerable<EventoDto>>(eventos).ToList();
+        }
+
+        public ListaPaginada<EventoDto> ListarEventosPaginado(string filtro, Paginacion paginacion)
+        {
+            Expression<Func<Evento, bool>> expresionFiltro = null;
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                filtro = filtro.Trim();
+                expresionFiltro =
+                    x =>
+                    x.Descripcion.Contains(filtro);
+                    //|| x.Nombre.Contains(filtro) ||
+                    //x.TipoDocumentoIdentidad.DescripcionCorta.Contains(filtro) || x.NumeroDeDocumento.Contains(filtro);
+            }
+
+            var eventos = Repositorio.Listar<Evento>(expresionFiltro, paginacion);
+            return Mapper.Map<ListaPaginada<EventoDto>>(eventos);
+
         }
     }
 }
