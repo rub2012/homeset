@@ -1,6 +1,7 @@
 ﻿@{
-    var items = (HomeSet.Domain.ListaPaginada<HomeSet.Domain.Dto.EventoDto>) ViewBag.Items;
+    Layout = null;
 }
+@model HomeSet.Domain.ListaPaginada<HomeSet.Domain.Dto.EventoDto>
 @*<form asp-controller="Evento" asp-action="Alta" method="post">
         Descripcion: <input asp-for="Descripcion" /><br />
         <button class="btn btn-primary" type="submit">Guardar</button>
@@ -17,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in items)
+        @foreach (var item in Model)
     {
         <tr>
             <td>
@@ -38,12 +39,28 @@
 }
     </tbody>
 </table>
-@*<nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </nav>*@
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        @{
+            for (int i = 1; i <= Model.PaginasTotales; i++)
+            {
+                <li class="page-item"><a class="page-link" asp-controller="Evento" asp-action="Listar" asp-route-filtro="" asp-route-pagina="@i" 
+              data-ajax="true"
+              data-ajax-method="GET"
+              data-ajax-mode="replace"
+              data-ajax-update="#gridTabla">@i</a></li>
+            }
+        }
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+    </nav>
+
+<script>
+  $(function () {
+      $('.page-link').click(function () {
+          var filtro = $("#filtro").val();
+          this.attr("href", this.attr("href") + '?filtro='+filtro);
+    });
+  });
+</script>

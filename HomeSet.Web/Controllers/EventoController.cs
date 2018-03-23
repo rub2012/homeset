@@ -27,55 +27,26 @@ namespace HomeSet.Controllers
         //}
 
         //[AjaxOnly]
+        //[ValidateAntiForgeryToken]
+        [AjaxOnly]
         [ActionName("Listar")]
         public ActionResult Listar(string filtro, int pagina = 1, string ordenarPor = "Id", DirOrden dirOrden = DirOrden.Asc)
         {
-            //ListQuery(filtro, pagina, ordenarPor, dirOrden);
-            var eventos = new List<EventoDto>{
-                new EventoDto{ Descripcion = "Manada"},
-                new EventoDto{ Descripcion = "Moto"},
-                new EventoDto{ Descripcion = "lavada"},
-                new EventoDto{ Descripcion = "secada"},
-                new EventoDto{ Descripcion = "tomada"},
-            };
             //return View("Index", new ListaPaginada<EventoDto>(eventos, 1, 10, 10));
-            ViewBag.Items = new ListaPaginada<EventoDto>(eventos, 1, 10, 10);
-            return View("Index", (object)filtro);
+            //ViewBag.Items = new ListaPaginada<EventoDto>(eventos, 1, 10, 10);
+            return View("Listar", ListQuery(filtro, pagina, ordenarPor, dirOrden));
         }
 
+        [HttpGet]
         public IActionResult Index(string sortOrder, string searchString)
         {
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewData["CurrentFilter"] = searchString;
+            //ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            //ViewData["CurrentFilter"] = searchString;
 
-            //var students = from s in _context.Students
-            //               select s;
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    students = students.Where(s => s.LastName.Contains(searchString)
-            //                           || s.FirstMidName.Contains(searchString));
-            //}
             
-            var eventos = new List<EventoDto>{
-                new EventoDto{ Descripcion = "Manada"},
-                new EventoDto{ Descripcion = "Moto"},
-                new EventoDto{ Descripcion = "lavada"},
-                new EventoDto{ Descripcion = "secada"},
-                new EventoDto{ Descripcion = "tomada"},
-            };
-
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    eventos = eventos.OrderByDescending(s => s.Descripcion).ToList();
-                    break;
-                default:
-                    eventos = eventos.OrderBy(s => s.Descripcion).ToList();
-                    break;
-            }
-            ViewBag.Items = new ListaPaginada<EventoDto>(eventos, 1, 10, 10);
-            return View(new ListaPaginada<EventoDto>(eventos, 1,10,10));
+            //ViewBag.Items = new ListaPaginada<EventoDto>(eventos, 1, 10, 10);
+            return View(ListQuery("", 1, "Id", DirOrden.Asc));
         }
 
         [HttpPost]
@@ -90,11 +61,11 @@ namespace HomeSet.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private void ListQuery(string filtro, int pagina, string ordenarPor, DirOrden dirOrden)
+        private ListaPaginada<EventoDto> ListQuery(string filtro, int pagina, string ordenarPor, DirOrden dirOrden)
         {
-            var paginacion = new Paginacion(ordenarPor, dirOrden, pagina, 10);
+            var paginacion = new Paginacion(ordenarPor, dirOrden, pagina, 5);
 
-            ViewBag.Items = Negocio.ListarEventosPaginado(filtro, paginacion);
+            return Negocio.ListarEventosPaginado(filtro, paginacion);
         }
     }
 }

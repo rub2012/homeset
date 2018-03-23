@@ -62,8 +62,14 @@ namespace HomeSet.Negocio
             }
 
             var eventos = Repositorio.Listar<Evento>(expresionFiltro, paginacion);
-            return Mapper.Map<ListaPaginada<EventoDto>>(eventos);
+            return MapearPaginado<Evento, EventoDto>(eventos);
 
+        }
+
+        private ListaPaginada<TEntityDto> MapearPaginado<TEntity,TEntityDto>(ListaPaginada<TEntity> entidadesPaginadas) where TEntity : class where TEntityDto : class
+        {
+            var itemsDto = Mapper.Map<IList<TEntityDto>>(entidadesPaginadas.Items);
+            return new ListaPaginada<TEntityDto>(itemsDto, entidadesPaginadas.Pagina, entidadesPaginadas.ItemsPorPagina, entidadesPaginadas.ItemsTotales);
         }
     }
 }

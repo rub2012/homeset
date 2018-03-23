@@ -86,12 +86,8 @@ namespace HomeSet.Repositorio
 
             if (paginacion.OrdenarPor != null)
             {
-                var selectorOrden = Expresiones.Propiedad<TEntity>(paginacion.OrdenarPor);
-                resultados = paginacion.DireccionOrden == DirOrden.Asc
-                                 ? resultados.OrderBy(selectorOrden)
-                                 : resultados.OrderByDescending(selectorOrden);
+                resultados.OrderBy<TEntity>(paginacion.OrdenarPor, paginacion.DireccionOrden == DirOrden.Asc);
             }
-
 
             resultados = resultados.Skip((paginacion.Pagina - 1) * paginacion.ItemsPorPagina).Take(paginacion.ItemsPorPagina);
 

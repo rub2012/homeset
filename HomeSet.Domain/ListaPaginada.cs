@@ -12,6 +12,10 @@ namespace HomeSet.Domain
         public int ItemsTotales { get; private set; }
         public IList<TEntity> Items { get; private set; }
 
+        public int PaginasTotales { get {
+                return (ItemsTotales + ItemsPorPagina - 1 ) / ItemsPorPagina;
+            } }
+
         public ListaPaginada(IList<TEntity> items, int pagina, int itemsPorPagina, int itemsTotales)
         {
             Items = items;

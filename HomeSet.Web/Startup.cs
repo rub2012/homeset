@@ -21,11 +21,23 @@ namespace HomeSet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddMvc(options =>
+            //{
+            //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            //});
             services.AddMvc();
             services.AddAutoMapper(cfg => cfg.AddProfile<Mapeo>());
             services.AddScoped<IRepositorio, HomeContext>();
             services.AddScoped<INegocio, Manager>();
+            //services.AddAntiforgery(options =>
+            //{
+            //    options.HeaderName = "X-XSRF-TOKEN";
+            //    options.SuppressXFrameOptionsHeader = false;
+            //});
             //services.AddDbContext<HomeContext>();
+            //services.AddDataProtection()
+            //    .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
+            //    .SetApplicationName("HomeSet");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
