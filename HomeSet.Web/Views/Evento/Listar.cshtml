@@ -45,7 +45,7 @@
         @{
             for (int i = 1; i <= Model.PaginasTotales; i++)
             {
-                <li class="page-item"><a class="page-link" asp-controller="Evento" asp-action="Listar" asp-route-filtro="" asp-route-pagina="@i" 
+                <li class="page-item"><a class="page-link paginador" asp-controller="Evento" asp-action="Listar" asp-route-filtro="" asp-route-pagina="@i" 
               data-ajax="true"
               data-ajax-method="GET"
               data-ajax-mode="replace"
@@ -55,12 +55,3 @@
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
     </nav>
-
-<script>
-  $(function () {
-      $('.page-link').click(function () {
-          var filtro = $("#filtro").val();
-          this.attr("href", this.attr("href") + '?filtro='+filtro);
-    });
-  });
-</script>
