@@ -11,10 +11,11 @@
 <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
-            <th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayName("Descripcion")</a></th>
-            @*<th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>*@
+            @*<th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayName("Descripcion")</a></th>*@
+            <th>Descripcion</th>
+            <th>Categoria</th>
+            <th>Sub-Categoria</th>
+            <th>Fecha</th>
         </tr>
     </thead>
     <tbody>
@@ -24,17 +25,26 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Descripcion)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCategoria.Categoria.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubCategoria.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
             @*<td>
-                    @Html.DisplayFor(modelItem => item.FirstMidName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>*@
+            @Html.DisplayFor(modelItem => item.FirstMidName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+        </td>*@
         </tr>
 }
     </tbody>

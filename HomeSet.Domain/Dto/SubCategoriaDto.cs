@@ -4,11 +4,11 @@ using System.Text;
 
 namespace HomeSet.Domain.Dto
 {
-    public class EventoDto
+    public class SubCategoriaDto
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
-        public SubCategoriaDto SubCategoria { get; set; }
-        public DateTime Fecha { get; set; }
+        public CategoriaDto Categoria { get; set; }
+        
     }
 }

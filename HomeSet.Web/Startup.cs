@@ -26,6 +26,7 @@ namespace HomeSet
             //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             //});
             services.AddMvc();
+            //services.AddEntityFrameworkProxies();
             services.AddAutoMapper(cfg => cfg.AddProfile<Mapeo>());
             services.AddScoped<IRepositorio, HomeContext>();
             services.AddScoped<INegocio, Manager>();

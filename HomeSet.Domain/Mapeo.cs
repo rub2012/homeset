@@ -10,6 +10,12 @@ namespace HomeSet.Domain
         {
             CreateMap<Evento, EventoDto>();
             CreateMap<EventoDto, Evento>();
+
+            CreateMap<Categoria, CategoriaDto>();
+            CreateMap<CategoriaDto, Categoria>();
+
+            CreateMap<SubCategoria, SubCategoriaDto>();
+            CreateMap<SubCategoriaDto, SubCategoria>();
         }
     }
 }

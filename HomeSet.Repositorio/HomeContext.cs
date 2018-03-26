@@ -21,6 +21,7 @@ namespace HomeSet.Repositorio
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseMySQL(Configuration["ConnectionStrings:MysqlDB"]);
         }
 
@@ -30,7 +31,11 @@ namespace HomeSet.Repositorio
 
             //Se mapean todas las entidades bajo el namespace Molinos.Scato.Dominio.Entidades      
             MapearAssemblyDe<Evento>(modelBuilder, x => x.Namespace == typeof(Evento).Namespace, excluir: null);
-           
+
+            modelBuilder.Entity<Evento>()
+            .HasOne(p => p.SubCategoria);
+            //.WithMany(b => b.Posts);
+
         }
 
         public int GuardarCambios()
