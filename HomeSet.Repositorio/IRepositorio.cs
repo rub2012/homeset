@@ -1,4 +1,5 @@
 ﻿using HomeSet.Domain;
+using HomeSet.Domain.Entidades;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace HomeSet.Repositorio
 
         IEnumerable<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion = null, int? maxResultados = null) where TEntity : class;
 
+        //ListaPaginada<Evento> Listar<TEntity>(Expression<Func<Evento, bool>> condicion, Paginacion paginacion) where TEntity : class;
         ListaPaginada<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion, Paginacion paginacion) where TEntity : class;
 
 

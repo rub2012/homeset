@@ -25,11 +25,11 @@ namespace HomeSet
             //{
             //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             //});
-            services.AddMvc();
-            //services.AddEntityFrameworkProxies();
+            services.AddMvc();            
             services.AddAutoMapper(cfg => cfg.AddProfile<Mapeo>());
             services.AddScoped<IRepositorio, HomeContext>();
             services.AddScoped<INegocio, Manager>();
+            services.AddEntityFrameworkProxies();
             //services.AddAntiforgery(options =>
             //{
             //    options.HeaderName = "X-XSRF-TOKEN";

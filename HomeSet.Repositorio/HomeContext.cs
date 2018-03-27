@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace HomeSet.Repositorio
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseMySQL(Configuration["ConnectionStrings:MysqlDB"]);
         }
 
@@ -31,10 +32,6 @@ namespace HomeSet.Repositorio
 
             //Se mapean todas las entidades bajo el namespace Molinos.Scato.Dominio.Entidades      
             MapearAssemblyDe<Evento>(modelBuilder, x => x.Namespace == typeof(Evento).Namespace, excluir: null);
-
-            modelBuilder.Entity<Evento>()
-            .HasOne(p => p.SubCategoria);
-            //.WithMany(b => b.Posts);
 
         }
 
@@ -81,7 +78,7 @@ namespace HomeSet.Repositorio
 
         public ListaPaginada<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion, Paginacion paginacion) where TEntity : class
         {
-            IQueryable<TEntity> resultados = Set<TEntity>();
+            IQueryable<TEntity> resultados = Set<TEntity>();//as IQueryable<Evento>;
             if (condicion != null)
             {
                 resultados = resultados.Where(condicion);
@@ -94,7 +91,11 @@ namespace HomeSet.Repositorio
                 resultados.OrderBy<TEntity>(paginacion.OrdenarPor, paginacion.DireccionOrden == DirOrden.Asc);
             }
 
-            resultados = resultados.Skip((paginacion.Pagina - 1) * paginacion.ItemsPorPagina).Take(paginacion.ItemsPorPagina);
+            var resultados2 = resultados.Skip((paginacion.Pagina - 1) * paginacion.ItemsPorPagina).Take(paginacion.ItemsPorPagina) as IQueryable<Evento>;
+            resultados2 = resultados2.Include(s => s.SubCategoria).ThenInclude(s => s.Categoria);
+            resultados = resultados2 as IQueryable<TEntity>;
+            //resultados = resultados.Include("");
+            //var s = GetNaviProps(typeof(TEntity));
 
             return new ListaPaginada<TEntity>(resultados.ToList(), paginacion.Pagina, paginacion.ItemsPorPagina, itemsTotales);
         }
@@ -153,6 +154,14 @@ namespace HomeSet.Repositorio
             {
                 metodo.MakeGenericMethod(tipoEntidad).Invoke(modelBuilder, null);
             }
+        }
+
+        private static string[] GetNaviProps(Type entityType)
+        {
+            return entityType.GetProperties()
+                             .Where(p => (typeof(IEnumerable).IsAssignableFrom(p.PropertyType) && p.PropertyType != typeof(string)) || p.PropertyType.Namespace == entityType.Namespace)
+                             .Select(p => p.Name)
+                             .ToArray();
         }
     }
 }
