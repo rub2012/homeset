@@ -56,6 +56,20 @@ namespace HomeSet.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public IActionResult Modificar(int id)
+        {
+            //Negocio.Alta<Evento, EventoDto>(dto);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public IActionResult Eliminar(int id)
+        {
+            //Negocio.Alta<Evento, EventoDto>(dto);
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

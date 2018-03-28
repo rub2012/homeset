@@ -27,15 +27,15 @@ namespace HomeSet
             //});
             services.AddMvc();            
             services.AddAutoMapper(cfg => cfg.AddProfile<Mapeo>());
-            services.AddScoped<IRepositorio, HomeContext>();
+            services.AddDbContext<HomeContext>();
+            services.AddScoped<IRepositorio>(provider => provider.GetService<HomeContext>());
             services.AddScoped<INegocio, Manager>();
-            services.AddEntityFrameworkProxies();
+            //services.AddEntityFrameworkProxies();
             //services.AddAntiforgery(options =>
             //{
             //    options.HeaderName = "X-XSRF-TOKEN";
             //    options.SuppressXFrameOptionsHeader = false;
             //});
-            //services.AddDbContext<HomeContext>();
             //services.AddDataProtection()
             //    .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
             //    .SetApplicationName("HomeSet");

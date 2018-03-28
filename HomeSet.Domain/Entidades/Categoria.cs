@@ -2,7 +2,7 @@
 
 namespace HomeSet.Domain.Entidades
 {
-    public class Categoria
+    public class Categoria : IIdentificable
     {
         [Key]
         public virtual int Id { get; set; }

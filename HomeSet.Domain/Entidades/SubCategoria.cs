@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HomeSet.Domain.Entidades
 {
-    public class SubCategoria
+    public class SubCategoria : IIdentificable
     {
         [Key]
         //public virtual int SubCategoriaId { get; set; }

@@ -1,7 +1,10 @@
-﻿using System;
+﻿using HomeSet.Domain.Entidades;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace HomeSet.Domain
@@ -33,6 +36,53 @@ namespace HomeSet.Domain
             }
 
             return Expression.Lambda(body, param);
+        }
+
+        public static TRelated Load<TRelated>(
+            this Action<object, string> loader,
+            object entity,
+            ref TRelated navigationField,
+            [CallerMemberName] string navigationName = null)
+            where TRelated : class
+        {
+            loader?.Invoke(entity, navigationName);
+
+            return navigationField;
+        }
+
+        public static IQueryable<TEntity> LoadRelated<TEntity>(this IQueryable<TEntity> source,bool cargar = true) where TEntity : class
+        {
+            if (cargar)
+            {
+                var tipo = typeof(TEntity);
+                if (tipo == typeof(Evento))
+                {
+                    var source2 = source as IQueryable<Evento>;
+                    source2 = source2.Include(s => s.SubCategoria).ThenInclude(s => s.Categoria);
+                    return source2 as IQueryable<TEntity>;
+                }
+                else if (tipo == typeof(SubCategoria))
+                {
+                    var source2 = source as IQueryable<SubCategoria>;
+                    source2 = source2.Include(s => s.Categoria);
+                    return source2 as IQueryable<TEntity>;
+                }
+                else
+                {
+                    return source;
+                }
+                //else if (tipo == typeof(Categoria))
+                //{
+                //    var source2 = source as IQueryable<Categoria>;
+                //    source2.Include(s => s.).ThenInclude(s => s.Categoria);
+                //    return source2 as IQueryable<TEntity>;
+                //}
+            }
+            else
+            {
+                return source;
+            }
+
         }
 
     }

@@ -11,20 +11,19 @@ namespace HomeSet.Repositorio
     {
         int GuardarCambios();
 
-        TEntity Obtener<TEntity>(object id) where TEntity : class;
+        TEntity Obtener<TEntity>(int id, bool cargarRelated = true) where TEntity : class , IIdentificable;
 
         EntityEntry<TEntity> Agregar<TEntity>(TEntity entidad) where TEntity : class;
 
-        EntityEntry<TEntity> Remover<TEntity>(object id) where TEntity : class;
+        EntityEntry<TEntity> Remover<TEntity>(int id) where TEntity : class, IIdentificable;
 
         EntityEntry<TEntity> Remover<TEntity>(TEntity entidad) where TEntity : class;
 
         EntityEntry<TEntity> Actualizar<TEntity>(TEntity entidad) where TEntity : class;
 
-        IEnumerable<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion = null, int? maxResultados = null) where TEntity : class;
+        IEnumerable<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion = null, int? maxResultados = null, bool cargarRelated = true) where TEntity : class;
 
-        //ListaPaginada<Evento> Listar<TEntity>(Expression<Func<Evento, bool>> condicion, Paginacion paginacion) where TEntity : class;
-        ListaPaginada<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion, Paginacion paginacion) where TEntity : class;
+        ListaPaginada<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion, Paginacion paginacion, bool cargarRelated = true) where TEntity : class;
 
 
 

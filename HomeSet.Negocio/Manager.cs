@@ -28,7 +28,7 @@ namespace HomeSet.Negocio
 
         }
 
-        public void Baja<TEntity>(int id) where TEntity : class
+        public void Baja<TEntity>(int id) where TEntity : class ,IIdentificable
         {
             var resultado = Repositorio.Remover<TEntity>(id);
             Repositorio.GuardarCambios();
@@ -56,9 +56,9 @@ namespace HomeSet.Negocio
                 filtro = filtro.Trim();
                 expresionFiltro =
                     x =>
-                    x.Descripcion.Contains(filtro);
-                    //|| x.Nombre.Contains(filtro) ||
-                    //x.TipoDocumentoIdentidad.DescripcionCorta.Contains(filtro) || x.NumeroDeDocumento.Contains(filtro);
+                    x.Descripcion.Contains(filtro)
+                    || x.SubCategoria.Descripcion.Contains(filtro) 
+                    || x.SubCategoria.Categoria.Descripcion.Contains(filtro);
             }
 
             var eventos = Repositorio.Listar<Evento>(expresionFiltro, paginacion);

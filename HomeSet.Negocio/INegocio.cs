@@ -8,7 +8,7 @@ namespace HomeSet.Negocio
     public interface INegocio
     {
         int Alta<TEntity, TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class;
-        void Baja<TEntity>(int id) where TEntity : class ;
+        void Baja<TEntity>(int id) where TEntity : class, IIdentificable;
         void Modificacion<TEntity, TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class;
         IList<EventoDto> ListarEventos();
         ListaPaginada<EventoDto> ListarEventosPaginado(string filtro, Paginacion paginacion);
