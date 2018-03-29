@@ -50,24 +50,30 @@ namespace HomeSet.Controllers
         }
 
         [HttpPost]
-        public IActionResult Alta(EventoDto dto)
+        public IActionResult Crear(EventoDto dto)
         {
             Negocio.Alta<Evento,EventoDto>(dto);
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public IActionResult Crear()
+        {
+            //Negocio.Alta<Evento, EventoDto>(dto);
+            return RedirectToAction("Index", "Evento");
+        }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Modificar(int id)
         {
             //Negocio.Alta<Evento, EventoDto>(dto);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Evento");
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Eliminar(int id)
         {
             //Negocio.Alta<Evento, EventoDto>(dto);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Evento");
         }
 
         public IActionResult Error()

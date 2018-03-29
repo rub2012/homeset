@@ -6,15 +6,37 @@
     @*data-ajax-loading="#divloading"
         data-ajax-success="Success"
         data-ajax-failure="Failure"*@
-    <form asp-controller="Evento" asp-action="Listar"
-          data-ajax="true"
-          data-ajax-method="GET"
-          data-ajax-mode="replace"
-          data-ajax-update="#gridTabla">
-        @Html.Label("Filtro") <input type="text" id="filtro" name="filtro" class="input-large" />
-        <button class="btn btn-primary" type="submit">Filtrar</button>
-    </form>
+    <div class="row">
+        <form asp-controller="Evento" asp-action="Listar"
+              data-ajax="true"
+              data-ajax-method="GET"
+              data-ajax-mode="replace"
+              data-ajax-update="#gridTabla">
+            <div class="form-inline mb-2">
+                <label class="control-label mb-2 mr-sm-2 mb-sm-0" for="">Filtro</label>
+                <div class="mb-2 mr-sm-2 mb-sm-0">
+                    <input type="text" class="form-control" id="filtro" name="filtro" placeholder="">
+                    @*<span asp-validation-for="filtro" class="text-danger"></span>*@
+                </div>
+                <div class="mb-2 mr-sm-2 mb-sm-0">
+                    <button class="btn btn-primary" type="submit">Filtrar</button>
+                </div>
 
+            </div>
+            @*<div class="form-group">
+                <div class="offset-md-4 col-md-2">
+                    <button class="btn btn-info" type="submit">Filtrar</button>
+                </div>
+            </div>*@
+            @*@Html.Label("Filtro") <input type="text" id="filtro" name="filtro" class="input-large" />*@
+
+        </form>
+        <div class="offset-lg-7">
+            <a class="btn btn-primary" asp-controller="Evento" asp-action="Crear">Crear Evento</a>
+            @*@Html.ActionLink("Crear Evento", "Crear", "Evento", null, new { @class = "ajax-editar-link btn btn-primary pull-right" })*@
+            @*<button class="btn btn-primary" asp-controller="Evento" asp-action="Crear">Crear Evento</button>*@
+        </div>
+    </div>
     <div id="gridTabla">
         @await Html.PartialAsync("Listar", ViewData)
     </div>

@@ -31,16 +31,16 @@
         </script>
         <script src="~/lib/jquery.unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+    </environment>    
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <div class="container">
                 <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
-                    </button>
+                    </button>*@
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HomeSet</a>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -58,8 +58,5 @@
         @RenderBody()
     </div>
     @RenderSection("Scripts", required: false)
-    <div id="spinner" style="display:none;">
-        <i class="fa fa-spinner fa-spin" style="font-size:48px;color:blue"></i>
-    </div>
 </body>
 </html>

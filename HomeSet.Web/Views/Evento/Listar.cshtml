@@ -7,59 +7,59 @@
         <button class="btn btn-primary" type="submit">Guardar</button>
 
     </form>*@
-
-<table class="table table-sm table-responsive-sm table-striped table-bordered table-hover">
-    <thead class="thead-dark">
-        <tr>
-            @*<th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayName("Descripcion")</a></th>*@
-            <th>Descripcion</th>
-            <th>Categoria</th>
-            <th>Sub-Categoria</th>
-            <th>Fecha</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubCategoria.Categoria.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubCategoria.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha)
-            </td>
-            <td>
-                <a asp-action="Modificar" asp-route-id="@item.Id" class="glyphicon-edit"></a>
-            </td>
-            <td>
-                <a asp-action="Eliminar" asp-route-id="@item.Id" class="glyphicon-remove"></a>
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.FirstMidName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EnrollmentDate)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-        </td>*@
-        </tr>
-}
-    </tbody>
-</table>
-<nav aria-label="Page navigation">
+<div style="height:50%">
+    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                @*<th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayName("Descripcion")</a></th>*@
+                <th>Descripcion</th>
+                <th>Categoria</th>
+                <th>Sub-Categoria</th>
+                <th>Fecha</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubCategoria.Categoria.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubCategoria.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td align="center">
+                        <a asp-action="Modificar" asp-route-id="@item.Id"><octicon symbol="Pencil"></octicon></a>
+                    </td>
+                    <td align="center">
+                        <a asp-action="Eliminar" asp-route-id="@item.Id"><octicon symbol="Trashcan"></octicon></a>
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.FirstMidName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<nav class="" aria-label="Page navigation">
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
         @{
             for (int i = 1; i <= Model.PaginasTotales; i++)
             {
@@ -70,6 +70,5 @@
               data-ajax-update="#gridTabla">@i</a></li>
             }
         }
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
     </ul>
     </nav>
