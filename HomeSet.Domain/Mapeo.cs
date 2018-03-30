@@ -8,7 +8,10 @@ namespace HomeSet.Domain
     {
         public Mapeo()
         {
-            CreateMap<Evento, EventoDto>();
+            CreateMap<Evento, EventoDto>()
+                .ForMember(x => x.CategoriaDescripcion,x => x.MapFrom(s => s.SubCategoria.Categoria.Descripcion))
+                .ForMember(x => x.SubCategoriaDescripcion, x => x.MapFrom(s => s.SubCategoria.Descripcion))
+                .ForMember(x => x.CategoriaId, x => x.MapFrom(s => s.SubCategoria.Categoria.Id));
             CreateMap<EventoDto, Evento>();
 
             CreateMap<Categoria, CategoriaDto>();

@@ -12,9 +12,9 @@
         <thead class="thead-dark">
             <tr>
                 @*<th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayName("Descripcion")</a></th>*@
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th>Categoria</th>
-                <th>Sub-Categoria</th>
+                <th>Sub-Categoría</th>
                 <th>Fecha</th>
                 <th></th>
                 <th></th>
@@ -28,10 +28,10 @@
                         @Html.DisplayFor(modelItem => item.Descripcion)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SubCategoria.Categoria.Descripcion)
+                        @Html.DisplayFor(modelItem => item.CategoriaDescripcion)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SubCategoria.Descripcion)
+                        @Html.DisplayFor(modelItem => item.SubCategoriaDescripcion)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Fecha)

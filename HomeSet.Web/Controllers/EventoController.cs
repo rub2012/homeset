@@ -9,6 +9,8 @@ using HomeSet.Domain.Atributos;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Globalization;
 
 namespace HomeSet.Controllers
 {
@@ -74,6 +76,7 @@ namespace HomeSet.Controllers
         public IActionResult Crear()
         {
             var dto = new EventoDto { Fecha = DateTime.Now };
+            CargarCategorias();
             return View(dto);
         }
 
@@ -81,6 +84,7 @@ namespace HomeSet.Controllers
         public IActionResult Modificar(int id)
         {
             var dto = Negocio.Obtener<Evento, EventoDto>(id);
+            CargarCategorias();
             return View(dto);
         }
 
@@ -101,6 +105,11 @@ namespace HomeSet.Controllers
             var paginacion = new Paginacion(ordenarPor, dirOrden, pagina, 5);
 
             return Negocio.ListarEventosPaginado(filtro, paginacion);
+        }
+
+        private void CargarCategorias()
+        {
+            ViewBag.Categorias = Negocio.ListarCategorias().Select(item => new SelectListItem { Value = item.Id.ToString(CultureInfo.InvariantCulture), Text = item.Descripcion }).ToList();
         }
     }
 }

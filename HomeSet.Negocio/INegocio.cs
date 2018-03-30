@@ -11,7 +11,8 @@ namespace HomeSet.Negocio
         int Alta<TEntity, TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class;
         void Baja<TEntity>(int id) where TEntity : class, IIdentificable;
         void Modificacion<TEntity, TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class;
-        IList<EventoDto> ListarEventos();
+        IEnumerable<EventoDto> ListarEventos();
         ListaPaginada<EventoDto> ListarEventosPaginado(string filtro, Paginacion paginacion);
+        IEnumerable<CategoriaDto> ListarCategorias();
     }
 }

@@ -50,10 +50,10 @@ namespace HomeSet.Negocio
             Repositorio.GuardarCambios();
         }
 
-        public IList<EventoDto> ListarEventos()
+        public IEnumerable<EventoDto> ListarEventos()
         {
             var eventos = Repositorio.Listar<Evento>();
-            return Mapper.Map<IEnumerable<EventoDto>>(eventos).ToList();
+            return Mapper.Map<IEnumerable<EventoDto>>(eventos);
         }
 
         public ListaPaginada<EventoDto> ListarEventosPaginado(string filtro, Paginacion paginacion)
@@ -72,6 +72,12 @@ namespace HomeSet.Negocio
             var eventos = Repositorio.Listar<Evento>(expresionFiltro, paginacion);
             return MapearPaginado<Evento, EventoDto>(eventos);
 
+        }
+
+        public IEnumerable<CategoriaDto> ListarCategorias()
+        {
+            var categorias = Repositorio.Listar<Categoria>();
+            return Mapper.Map<IEnumerable<CategoriaDto>>(categorias);
         }
 
         private ListaPaginada<TEntityDto> MapearPaginado<TEntity,TEntityDto>(ListaPaginada<TEntity> entidadesPaginadas) where TEntity : class where TEntityDto : class
