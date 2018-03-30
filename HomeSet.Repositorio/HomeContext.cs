@@ -43,8 +43,8 @@ namespace HomeSet.Repositorio
 
         public TEntity Obtener<TEntity>(int id,bool cargarRelated = true) where TEntity : class, IIdentificable
         {
-            return Find<TEntity>(id);            
-            //return Set<TEntity>().LoadRelated(cargarRelated).SingleOrDefault(s => s.Id == id);
+            //return Find<TEntity>(id);            
+            return Set<TEntity>().LoadRelated(cargarRelated).SingleOrDefault(s => s.Id == id);
         }
 
         public EntityEntry<TEntity> Agregar<TEntity>(TEntity entidad) where TEntity : class

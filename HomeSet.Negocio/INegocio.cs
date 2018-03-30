@@ -7,6 +7,7 @@ namespace HomeSet.Negocio
 {
     public interface INegocio
     {
+        TEntityDto Obtener<TEntity, TEntityDto>(int id) where TEntity : class, IIdentificable where TEntityDto : class;
         int Alta<TEntity, TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class;
         void Baja<TEntity>(int id) where TEntity : class, IIdentificable;
         void Modificacion<TEntity, TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class;

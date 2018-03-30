@@ -39,8 +39,8 @@
             <div class="container">
                 <div class="navbar-header">
                     @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>*@
+                            <span class="navbar-toggler-icon"></span>
+                        </button>*@
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HomeSet</a>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -58,5 +58,25 @@
         @RenderBody()
     </div>
     @RenderSection("Scripts", required: false)
+
+    <div class="modal fade" id="modal-editar" tabindex="-1" role="dialog" aria-labelledby="Crear/Modificar" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-editar-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-editar-body">
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-editar-cancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button id="modal-editar-guardar" type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

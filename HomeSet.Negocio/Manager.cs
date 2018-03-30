@@ -19,6 +19,14 @@ namespace HomeSet.Negocio
             Repositorio = repositorio;
             Mapper = mapper;
         }
+
+        public TEntityDto Obtener<TEntity,TEntityDto>(int id) where TEntity : class, IIdentificable where TEntityDto : class
+        {
+            var entidad = Repositorio.Obtener<TEntity>(id);
+            return Mapper.Map<TEntityDto>(entidad);
+
+        }
+
         public int Alta<TEntity,TEntityDto>(TEntityDto dto) where TEntity : class where TEntityDto : class
         {
             var entidad = Mapper.Map<TEntity>(dto);

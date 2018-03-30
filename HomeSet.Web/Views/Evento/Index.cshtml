@@ -31,8 +31,10 @@
             @*@Html.Label("Filtro") <input type="text" id="filtro" name="filtro" class="input-large" />*@
 
         </form>
-        <div class="offset-lg-7">
-            <a class="btn btn-primary" asp-controller="Evento" asp-action="Crear">Crear Evento</a>
+        <div class="offset-lg-6">
+            @*<a class="btn btn-primary" asp-controller="Evento" asp-action="Crear">Crear Evento</a>*@
+            <a class="btn btn-primary" data-toggle="modal" data-target="#modal-editar" data-href=@Url.Action("Crear","Evento") data-titulo="Crear Evento">Crear Evento</a>
+            
             @*@Html.ActionLink("Crear Evento", "Crear", "Evento", null, new { @class = "ajax-editar-link btn btn-primary pull-right" })*@
             @*<button class="btn btn-primary" asp-controller="Evento" asp-action="Crear">Crear Evento</button>*@
         </div>

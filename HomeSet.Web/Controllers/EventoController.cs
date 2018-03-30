@@ -8,6 +8,7 @@ using HomeSet.Domain;
 using HomeSet.Domain.Atributos;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace HomeSet.Controllers
 {
@@ -52,21 +53,35 @@ namespace HomeSet.Controllers
         [HttpPost]
         public IActionResult Crear(EventoDto dto)
         {
-            Negocio.Alta<Evento,EventoDto>(dto);
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(dto);
         }
+
+        [HttpPost]
+        public IActionResult Modificar(EventoDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View(dto);
+        }
+
         [HttpGet]
         public IActionResult Crear()
         {
-            //Negocio.Alta<Evento, EventoDto>(dto);
-            return RedirectToAction("Index", "Evento");
+            var dto = new EventoDto { Fecha = DateTime.Now };
+            return View(dto);
         }
 
         [HttpGet]
         public IActionResult Modificar(int id)
         {
-            //Negocio.Alta<Evento, EventoDto>(dto);
-            return RedirectToAction("Index", "Evento");
+            var dto = Negocio.Obtener<Evento, EventoDto>(id);
+            return View(dto);
         }
 
         [HttpGet]

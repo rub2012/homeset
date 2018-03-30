@@ -1,0 +1,13 @@
+﻿@model EventoDto
+@{
+    Layout = null;
+    ViewData["Title"] = "Modificar Evento";
+}
+
+<script src="~/js/validaciones.min.js"></script>
+<form asp-controller="Evento" asp-action="Modificar"
+      data-ajax="true"
+      data-ajax-method="POST">
+    @await Html.PartialAsync("_CrearModificar", Model)
+
+</form>

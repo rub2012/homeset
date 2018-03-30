@@ -8,7 +8,9 @@ namespace HomeSet.Domain.Dto
     public class EventoDto
     {
         public int Id { get; set; }
-        [Display]
+
+        [Required]
+        [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
         public SubCategoriaDto SubCategoria { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

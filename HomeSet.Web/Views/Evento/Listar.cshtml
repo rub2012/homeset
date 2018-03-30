@@ -37,7 +37,7 @@
                         @Html.DisplayFor(modelItem => item.Fecha)
                     </td>
                     <td align="center">
-                        <a asp-action="Modificar" asp-route-id="@item.Id"><octicon symbol="Pencil"></octicon></a>
+                        <a data-toggle="modal" data-target="#modal-editar" data-href=@Url.Action("Modificar","Evento",new {id = @item.Id}) data-titulo="Modificar Evento"><octicon symbol="Pencil"></octicon></a>
                     </td>
                     <td align="center">
                         <a asp-action="Eliminar" asp-route-id="@item.Id"><octicon symbol="Trashcan"></octicon></a>
