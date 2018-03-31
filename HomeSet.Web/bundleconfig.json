@@ -29,8 +29,8 @@
       "wwwroot/js/validacionesCustom.js"
     ],
     "minify": {
-      "enabled": false,
-      "renameLocals": false
+      "enabled": true,
+      "renameLocals": true
     },
     "sourceMap": false
   }
