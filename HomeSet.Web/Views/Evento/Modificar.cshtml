@@ -4,7 +4,10 @@
     ViewData["Title"] = "Modificar Evento";
 }
 
+<link rel="stylesheet" href="~/lib/datetimepicker/build/jquery.datetimepicker.min.css" />
 <script src="~/js/validaciones.min.js"></script>
+<script src="~/lib/datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+<script src="~/js/eventosCrearModificar.js" asp-append-version="true"></script>
 <form asp-controller="Evento" asp-action="Modificar"
       data-ajax="true"
       data-ajax-method="POST">

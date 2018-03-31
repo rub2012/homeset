@@ -40,3 +40,18 @@ function cargarModalEditar(data) {
     //$('#modal-editar-body form').attr('data-ajax-success', 'editarRepuestaFormulario');
 
 }
+
+function attachDatePickers() {
+    $('input.date').each(function () {
+            var $this = $(this);
+        $this.datetimepicker({
+            timepicker: false,
+            format: 'd/m/Y H:m',
+            lang: 'es'
+        });
+    });
+    //$('#datetimepicker1').datetimepicker();
+        //{ format: 'yyyy-MM-ddThh:mm' }
+    
+    //});
+}
