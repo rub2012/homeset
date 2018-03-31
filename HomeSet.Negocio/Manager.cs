@@ -80,10 +80,18 @@ namespace HomeSet.Negocio
             return Mapper.Map<IEnumerable<CategoriaDto>>(categorias);
         }
 
+        public IEnumerable<SubCategoriaDto> ListarSubCategoriasPorCategoriaId(int categoriaId)
+        {
+            var subCategorias = Repositorio.Listar<SubCategoria>(x => x.Categoria.Id == categoriaId,(int?) null, false);
+            return Mapper.Map<IEnumerable<SubCategoriaDto>>(subCategorias);
+        }
+
         private ListaPaginada<TEntityDto> MapearPaginado<TEntity,TEntityDto>(ListaPaginada<TEntity> entidadesPaginadas) where TEntity : class where TEntityDto : class
         {
             var itemsDto = Mapper.Map<IList<TEntityDto>>(entidadesPaginadas.Items);
             return new ListaPaginada<TEntityDto>(itemsDto, entidadesPaginadas.Pagina, entidadesPaginadas.ItemsPorPagina, entidadesPaginadas.ItemsTotales);
         }
+
+        
     }
 }

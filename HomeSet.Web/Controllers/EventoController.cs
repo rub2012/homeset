@@ -111,5 +111,12 @@ namespace HomeSet.Controllers
         {
             ViewBag.Categorias = Negocio.ListarCategorias().Select(item => new SelectListItem { Value = item.Id.ToString(CultureInfo.InvariantCulture), Text = item.Descripcion }).ToList();
         }
+
+        [HttpGet]
+        public JsonResult ListarSubcategorias(int categoriaId)
+        {
+            var subcategorias = Negocio.ListarSubCategoriasPorCategoriaId(categoriaId);
+            return Json(subcategorias.ToList());
+        }
     }
 }

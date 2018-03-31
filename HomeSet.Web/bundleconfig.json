@@ -25,11 +25,12 @@
     "outputFileName": "wwwroot/js/validaciones.min.js",
     "inputFiles": [
       "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
-      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "wwwroot/js/validacionesCustom.js"
     ],
     "minify": {
-      "enabled": true,
-      "renameLocals": true
+      "enabled": false,
+      "renameLocals": false
     },
     "sourceMap": false
   }

@@ -14,5 +14,6 @@ namespace HomeSet.Negocio
         IEnumerable<EventoDto> ListarEventos();
         ListaPaginada<EventoDto> ListarEventosPaginado(string filtro, Paginacion paginacion);
         IEnumerable<CategoriaDto> ListarCategorias();
+        IEnumerable<SubCategoriaDto> ListarSubCategoriasPorCategoriaId(int categoriaId);
     }
 }

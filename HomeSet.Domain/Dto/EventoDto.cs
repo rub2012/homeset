@@ -12,9 +12,11 @@ namespace HomeSet.Domain.Dto
         [Required]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
+        [Display(Name = "Sub-Categoría")]
         public int SubCategoriaId { get; set; }
         [Display(Name = "Sub-Categoría")]
         public string SubCategoriaDescripcion { get; set; }
+        [Display(Name = "Categoría")]
         public int CategoriaId { get; set; }
         [Display(Name = "Categoría")]
         public string CategoriaDescripcion { get; set; }
