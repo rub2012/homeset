@@ -1,4 +1,5 @@
 ﻿using HomeSet.Domain.Entidades;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,14 @@ namespace HomeSet.Domain
             }
 
         }
+
+            public static void AgregarErrores(this ModelStateDictionary estado, Resultado resultado)
+            {
+                foreach (var error in resultado.Errores)
+                {
+                    estado.AddModelError(error.Key, error.Value);
+                }
+            }
 
     }
 }

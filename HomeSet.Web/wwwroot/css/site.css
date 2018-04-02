@@ -47,3 +47,11 @@ body {
 .row {
     margin-left: 0;
 }
+
+.alerta-box {
+    width: 15%;
+    height: auto;
+    text-align: center;
+    font-weight: bold;
+    z-index: 10000;
+}

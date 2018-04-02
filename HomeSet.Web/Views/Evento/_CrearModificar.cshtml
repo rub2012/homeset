@@ -1,9 +1,9 @@
 ﻿@model EventoDto
 @{
     var Categorias = (IEnumerable<SelectListItem>)ViewBag.Categorias;
+    var SubCategorias = (IEnumerable<SelectListItem>)ViewBag.SubCategorias;
 }
 @Html.Hidden("getSubcategorias", @Url.Action("ListarSubcategorias", "Evento"))
-@Html.HiddenFor(m=>m.CategoriaId)
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="form-group">
     <label class="col-sm-2 control-label" asp-for="Descripcion"></label>
@@ -24,7 +24,8 @@
 <div class="form-group">
     <label class="col-sm-4 control-label" asp-for="SubCategoriaDescripcion"></label>
     <div class="col-sm-6">
-        <select asp-for="SubCategoriaId" asp-items=null class="form-control" id="subcategoria-dropdown">
+        <select asp-for="SubCategoriaId" asp-items=SubCategorias class="form-control" id="subcategoria-dropdown">
+            <option disabled selected>Elegir...</option>
         </select>
         <span asp-validation-for="SubCategoriaId" class="text-danger"></span>
     </div>

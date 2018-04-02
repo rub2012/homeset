@@ -1,6 +1,9 @@
 $(document).ready(function () {
     attachDatePickers();
-    $("#subcategoria-dropdown").attr('disabled','disabled');
+    if (!$("#Modificando").val())
+    {
+        $("#subcategoria-dropdown").attr('disabled', 'disabled');
+    }    
     $("#categoria-dropdown").on("change", function () {
         $("#subcategoria-dropdown").removeAttr('disabled');        
         $("#subcategoria-dropdown").empty();

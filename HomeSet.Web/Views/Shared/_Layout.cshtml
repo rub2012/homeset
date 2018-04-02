@@ -1,9 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@using HomeSet.Domain
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HomeSet</title>
+    @*<script src="~/lib/globalize/dist/globalize.js"></script>
+    <script src="~/lib/globalize/dist/globalize/date.js"></script>
+    <script src="~/lib/globalize/dist/globalize/message.js"></script>
+    <script src="~/lib/globalize/dist/globalize/number.js"></script>*@
+    <script type="text/javascript">
+            var ajaxEditSuccess = '@Html.Raw(AjaxEditSuccessResult.SuccessValue)';
+            //Globalize.culture("es");
+            //var btn = $.fn.button.noConflict(); // reverts $.fn.button to jqueryui btn
+            //$.fn.btn = btn; // assigns bootstrap button functionality to $.fn.btn
+    </script>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -31,7 +42,7 @@
         </script>
         <script src="~/lib/jquery.unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>    
+    </environment>
 </head>
 <body>
     <header>
@@ -56,6 +67,16 @@
 
     <div class="container body-content">
         @RenderBody()
+        <div id="alertaError" data-mensaje="Ocurrió un error" class="alert alert-error alert-dismissible collapse alerta-box centro-pantalla" role="alert">
+            <a class="close" data-hide="alert">×</a>
+            <span></span>
+        </div>
+        <div id="alertaInfo" class="alert alert-info alert-dismissible collapse alerta-box centro-pantalla" role="alert">
+            <span>Operación Exitosa</span>
+        </div>
+        <div id="alertaExitosa" class="alert alert-success alert-dismissible collapse alerta-box centro-pantalla" role="alert">
+            <span>Operación Exitosa</span>
+        </div>
     </div>
     @RenderSection("Scripts", required: false)
 
@@ -73,6 +94,25 @@
                 <div class="modal-footer">
                     <button id="modal-editar-cancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button id="modal-editar-guardar" type="button" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-eliminar" tabindex="-1" role="dialog" aria-labelledby="Eliminar" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-eliminar-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-eliminar-body" align="center">
+                </div>
+                <div class="modal-footer">
+                    <button id="modal-eliminar-cancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button id="modal-eliminar-confirmar" type="button" class="btn btn-danger" data-href="">Confirmar</button>
                 </div>
             </div>
         </div>

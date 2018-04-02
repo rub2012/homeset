@@ -38,7 +38,14 @@ namespace HomeSet.Repositorio
 
         public int GuardarCambios()
         {
-            return SaveChanges();
+            try
+            {
+                return SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public TEntity Obtener<TEntity>(int id,bool cargarRelated = true) where TEntity : class, IIdentificable

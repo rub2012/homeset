@@ -31,8 +31,7 @@ namespace HomeSet.Negocio
         {
             var entidad = Mapper.Map<TEntity>(dto);
             var resultado = Repositorio.Agregar(entidad);
-            Repositorio.GuardarCambios();
-            return 0;
+            return Repositorio.GuardarCambios();
 
         }
 
@@ -92,6 +91,53 @@ namespace HomeSet.Negocio
             return new ListaPaginada<TEntityDto>(itemsDto, entidadesPaginadas.Pagina, entidadesPaginadas.ItemsPorPagina, entidadesPaginadas.ItemsTotales);
         }
 
-        
+        public Resultado AltaEvento(EventoDto dto)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var evento = Mapper.Map<Evento>(dto);
+                evento.SubCategoria = Repositorio.Obtener<SubCategoria>(dto.SubCategoriaId);
+                Repositorio.Agregar(evento);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("",e.Message);
+            }
+            return resultado;
+        }
+
+        public Resultado ModificarEvento(EventoDto dto)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var evento = Mapper.Map<Evento>(dto);
+                evento.SubCategoria = Repositorio.Obtener<SubCategoria>(dto.SubCategoriaId);
+                Repositorio.Actualizar(evento);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
+
+        public Resultado EliminarEvento(int id)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                Repositorio.Remover<Evento>(id);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
     }
 }

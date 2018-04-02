@@ -13,7 +13,7 @@
             <tr>
                 @*<th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayName("Descripcion")</a></th>*@
                 <th>Descripción</th>
-                <th>Categoria</th>
+                <th>Categoría</th>
                 <th>Sub-Categoría</th>
                 <th>Fecha</th>
                 <th></th>
@@ -40,19 +40,9 @@
                         <a data-toggle="modal" data-target="#modal-editar" data-href=@Url.Action("Modificar","Evento",new {id = @item.Id}) data-titulo="Modificar Evento"><octicon symbol="Pencil"></octicon></a>
                     </td>
                     <td align="center">
-                        <a asp-action="Eliminar" asp-route-id="@item.Id"><octicon symbol="Trashcan"></octicon></a>
+                        <a data-toggle="modal" data-target="#modal-eliminar" data-href=@Url.Action("Eliminar","Evento",new {id = @item.Id}) data-titulo="Eliminar Evento"><octicon symbol="Trashcan"></octicon></a>
+                        @*<a asp-action="Eliminar" asp-route-id="@item.Id"><octicon symbol="Trashcan"></octicon></a>*@
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.FirstMidName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EnrollmentDate)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                        </td>*@
                 </tr>
             }
         </tbody>

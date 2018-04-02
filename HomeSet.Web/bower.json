@@ -9,6 +9,7 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "jquery.unobtrusive-ajax": "3.2.4",
     "octicons": "7.2.0",
-    "datetimepicker": "2.5.20"
+    "datetimepicker": "2.5.20",
+    "globalize": "1.3.0"
   }
 }

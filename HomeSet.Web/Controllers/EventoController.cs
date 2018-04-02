@@ -23,20 +23,11 @@ namespace HomeSet.Controllers
             Negocio = negocio;
         }
 
-        //public IActionResult Index()
-        //{
-        //    var dto = new EventoDto();
-        //    return View(dto);
-        //}
-
-        //[AjaxOnly]
         //[ValidateAntiForgeryToken]
         [AjaxOnly]
         [ActionName("Listar")]
         public ActionResult Listar(string filtro, int pagina = 1, string ordenarPor = "Id", DirOrden dirOrden = DirOrden.Asc)
         {
-            //return View("Index", new ListaPaginada<EventoDto>(eventos, 1, 10, 10));
-            //ViewBag.Items = new ListaPaginada<EventoDto>(eventos, 1, 10, 10);
             return View("Listar", ListQuery(filtro, pagina, ordenarPor, dirOrden));
         }
 
@@ -57,8 +48,14 @@ namespace HomeSet.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                var resultado = Negocio.AltaEvento(dto);
+                if (!resultado.HayErrores)
+                {
+                    return new AjaxEditSuccessResult();
+                }
+                ModelState.AgregarErrores(resultado);
             }
+            CargarCategorias();
             return View(dto);
         }
 
@@ -67,8 +64,15 @@ namespace HomeSet.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                var resultado = Negocio.ModificarEvento(dto);
+                if (!resultado.HayErrores)
+                {
+                    return new AjaxEditSuccessResult();
+                }
+                ModelState.AgregarErrores(resultado);
             }
+            CargarCategorias();
+            CargarSubCategorias(dto.CategoriaId);
             return View(dto);
         }
 
@@ -85,14 +89,15 @@ namespace HomeSet.Controllers
         {
             var dto = Negocio.Obtener<Evento, EventoDto>(id);
             CargarCategorias();
+            CargarSubCategorias(dto.CategoriaId);
             return View(dto);
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult Eliminar(int id)
         {
-            //Negocio.Alta<Evento, EventoDto>(dto);
-            return RedirectToAction("Index", "Evento");
+            var resultado = Negocio.EliminarEvento(id);
+            return Content(!resultado.HayErrores ? "true" : resultado.Errores.Values.First());            
         }
 
         public IActionResult Error()
@@ -102,7 +107,7 @@ namespace HomeSet.Controllers
 
         private ListaPaginada<EventoDto> ListQuery(string filtro, int pagina, string ordenarPor, DirOrden dirOrden)
         {
-            var paginacion = new Paginacion(ordenarPor, dirOrden, pagina, 5);
+            var paginacion = new Paginacion(ordenarPor, dirOrden, pagina, 10);
 
             return Negocio.ListarEventosPaginado(filtro, paginacion);
         }
@@ -110,6 +115,11 @@ namespace HomeSet.Controllers
         private void CargarCategorias()
         {
             ViewBag.Categorias = Negocio.ListarCategorias().Select(item => new SelectListItem { Value = item.Id.ToString(CultureInfo.InvariantCulture), Text = item.Descripcion }).ToList();
+        }
+
+        private void CargarSubCategorias(int categoriaId)
+        {
+            ViewBag.SubCategorias = Negocio.ListarSubCategoriasPorCategoriaId(categoriaId).Select(item => new SelectListItem { Value = item.Id.ToString(CultureInfo.InvariantCulture), Text = item.Descripcion }).ToList();
         }
 
         [HttpGet]
