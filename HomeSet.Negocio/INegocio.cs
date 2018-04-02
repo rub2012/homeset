@@ -18,5 +18,9 @@ namespace HomeSet.Negocio
         Resultado AltaEvento(EventoDto dto);
         Resultado ModificarEvento(EventoDto dto);
         Resultado EliminarEvento(int id);
+        ListaPaginada<SubCategoriaDto> ListarSubCategoriasPaginado(string filtro, Paginacion paginacion);
+        Resultado AltaSubCategoria(SubCategoriaDto dto);
+        Resultado ModificarSubCategoria(SubCategoriaDto dto);
+        Resultado EliminarSubCategoria(int id);
     }
 }

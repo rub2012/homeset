@@ -1,0 +1,16 @@
+﻿@model SubCategoriaDto
+@{
+    Layout = null;
+    ViewData["Title"] = "Nueva Sub-Categoría";
+}
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }*@
+<script src="~/js/validaciones.min.js" asp-append-version="true"></script>
+@*<script src="~/js/eventosCrearModificar.js" asp-append-version="true"></script>*@
+<form asp-controller="SubCategoria" asp-action="Crear"
+      data-ajax="true"
+      data-ajax-method="POST">
+    @await Html.PartialAsync("_CrearModificar", Model)
+
+</form>

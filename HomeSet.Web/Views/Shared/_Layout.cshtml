@@ -58,6 +58,15 @@
                         <li class="nav-item active">
                             <a class="nav-link" asp-area="" asp-controller="Evento" asp-action="Index">Eventos</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="menuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menú
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-area="" asp-controller="Evento" asp-action="Index">Eventos</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="SubCategoria" asp-action="Index">Sub-Categorías</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -66,9 +75,11 @@
 
     <div class="container body-content">
         @RenderBody()
-        <div id="alertaError" data-mensaje="Ocurrió un error" class="alert alert-error alert-dismissible collapse alerta-box centro-pantalla" role="alert">
-            <a class="close" data-hide="alert">×</a>
+        <div id="alertaError" data-mensaje="Ocurrió un error" class="alert alert-danger alert-dismissible collapse alerta-box centro-pantalla" role="alert">
+            @*<a class="close" data-dismiss="alert" aria-label="Close">×</a>*@
+            <button id="alertCloseButton" type="button" class="close" aria-label="Close">×</button>
             <span></span>
+            @*<span></span>*@
         </div>
         <div id="alertaInfo" class="alert alert-info alert-dismissible collapse alerta-box centro-pantalla" role="alert">
             <span>Operación Exitosa</span>

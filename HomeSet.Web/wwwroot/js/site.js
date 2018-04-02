@@ -55,6 +55,12 @@
         $('#modal-eliminar').modal('hide');
     });
 
+    //Ocultar alertError
+    $('#alertCloseButton').on('click', function () {
+        $("#alertaError").hide();
+    });
+    
+
 });
 
 function cargarModalEditar(data) {

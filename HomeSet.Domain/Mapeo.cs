@@ -17,7 +17,8 @@ namespace HomeSet.Domain
             CreateMap<Categoria, CategoriaDto>();
             CreateMap<CategoriaDto, Categoria>();
 
-            CreateMap<SubCategoria, SubCategoriaDto>();
+            CreateMap<SubCategoria, SubCategoriaDto>()
+                .ForMember(x => x.CategoriaDescripcion, x => x.MapFrom(s => s.Categoria.Descripcion));
             CreateMap<SubCategoriaDto, SubCategoria>();
         }
     }

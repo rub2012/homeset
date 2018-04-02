@@ -1,0 +1,14 @@
+﻿@model SubCategoriaDto
+@{
+    Layout = null;
+    ViewData["Title"] = "Modificar Sub-Categoría";
+}
+@Html.Hidden("Modificando", true)
+<script src="~/js/validaciones.min.js" asp-append-version="true"></script>
+@*<script src="~/js/eventosCrearModificar.js" asp-append-version="true"></script>*@
+<form asp-controller="SubCategoria" asp-action="Modificar"
+      data-ajax="true"
+      data-ajax-method="POST">
+    @await Html.PartialAsync("_CrearModificar", Model)
+
+</form>

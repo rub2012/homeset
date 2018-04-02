@@ -139,5 +139,72 @@ namespace HomeSet.Negocio
             }
             return resultado;
         }
+
+        public Resultado AltaSubCategoria(SubCategoriaDto dto)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var subCategoria = Mapper.Map<SubCategoria>(dto);
+                subCategoria.Categoria = Repositorio.Obtener<Categoria>(dto.CategoriaId);
+                Repositorio.Agregar(subCategoria);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
+
+        public Resultado ModificarSubCategoria(SubCategoriaDto dto)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var evento = Mapper.Map<SubCategoria>(dto);
+                evento.Categoria = Repositorio.Obtener<Categoria>(dto.CategoriaId);
+                Repositorio.Actualizar(evento);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
+
+        public Resultado EliminarSubCategoria(int id)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                Repositorio.Remover<SubCategoria>(id);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
+
+        
+            public ListaPaginada<SubCategoriaDto> ListarSubCategoriasPaginado(string filtro, Paginacion paginacion)
+        {
+            Expression<Func<SubCategoria, bool>> expresionFiltro = null;
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                filtro = filtro.Trim();
+                expresionFiltro =
+                    x =>
+                    x.Descripcion.Contains(filtro)
+                    || x.Categoria.Descripcion.Contains(filtro);
+            }
+
+            var subCategorias = Repositorio.Listar<SubCategoria>(expresionFiltro, paginacion);
+            return MapearPaginado<SubCategoria, SubCategoriaDto>(subCategorias);
+
+        }
     }
 }
