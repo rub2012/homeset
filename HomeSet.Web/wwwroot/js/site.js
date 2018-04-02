@@ -20,7 +20,7 @@
     })
 
     //Evento al cliquear en el boton Guardar para disparar el formularo ajax Post
-    $('#modal-editar-guardar').on('click', function () {
+    $('#modal-editar-guardar').on('click', function () {        
         var form = $("#modal-editar form");
         form.submit();
     });

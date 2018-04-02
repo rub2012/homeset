@@ -26,6 +26,7 @@
     "inputFiles": [
       "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
       "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "wwwroot/lib/jquery-validation/src/localization/messages_es_AR.js",
       "wwwroot/js/validacionesCustom.js"
     ],
     "minify": {
