@@ -9,13 +9,15 @@ namespace HomeSet.Domain.Dto
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "El Campo '{0}' es requerido")]
         [Display(Name = "Descripción")]
         public string Descripcion { get; set; }
+        [Required(ErrorMessage = "El Campo '{0}' es requerido")]
         [Display(Name = "Sub-Categoría")]
         public int SubCategoriaId { get; set; }
         [Display(Name = "Sub-Categoría")]
         public string SubCategoriaDescripcion { get; set; }
+        [Required(ErrorMessage = "El Campo '{0}' es requerido")]
         [Display(Name = "Categoría")]
         public int CategoriaId { get; set; }
         [Display(Name = "Categoría")]
