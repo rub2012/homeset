@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using HomeSet.Domain;
+using HomeSet.Domain.Entidades;
 using HomeSet.Negocio;
 using HomeSet.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,11 +27,18 @@ namespace HomeSet
             //{
             //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             //});
-            services.AddMvc();            
+            services.AddDbContext<IdentityContext>();
+            services.AddIdentity<Usuario, Rol>()
+                .AddEntityFrameworkStores<IdentityContext>()
+                .AddDefaultTokenProviders();
+
+                        
             services.AddAutoMapper(cfg => cfg.AddProfile<Mapeo>());
             services.AddDbContext<HomeContext>();
             services.AddScoped<IRepositorio>(provider => provider.GetService<HomeContext>());
             services.AddScoped<INegocio, Manager>();
+
+            services.AddMvc();
             //services.AddEntityFrameworkProxies();
             //services.AddAntiforgery(options =>
             //{
