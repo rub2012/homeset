@@ -1,0 +1,14 @@
+﻿@model CategoriaDto
+@{
+    Layout = null;
+    ViewData["Title"] = "Nueva Categoría";
+}
+
+<script src="~/js/validaciones.min.js" asp-append-version="true"></script>
+@*<script src="~/js/eventosCrearModificar.js" asp-append-version="true"></script>*@
+<form asp-controller="Categoria" asp-action="Crear"
+      data-ajax="true"
+      data-ajax-method="POST">
+    @await Html.PartialAsync("_CrearModificar", Model)
+
+</form>

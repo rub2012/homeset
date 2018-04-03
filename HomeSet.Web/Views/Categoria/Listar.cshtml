@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+@model HomeSet.Domain.ListaPaginada<CategoriaDto>
+
+<div style="height:50%">
+    <table class="table table-sm table-responsive-sm table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                @*<th><a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayName("Descripcion")</a></th>*@
+                <th>Descripción</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td align="center">
+                        <a data-toggle="modal" data-target="#modal-editar" data-href=@Url.Action("Modificar","Categoria",new {id = @item.Id}) data-titulo="Modificar Categoría"><octicon symbol="Pencil"></octicon></a>
+                    </td>
+                    <td align="center">
+                        <a data-toggle="modal" data-target="#modal-eliminar" data-href=@Url.Action("Eliminar","Categoria",new {id = @item.Id}) data-titulo="Eliminar Categoría"><octicon symbol="Trashcan"></octicon></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<nav class="" aria-label="Page navigation">
+    <ul class="pagination">
+        @{
+            for (int i = 1; i <= Model.PaginasTotales; i++)
+            {
+                <li class="page-item"><a class="page-link paginador" asp-controller="Categoria" asp-action="Listar" asp-route-filtro="" asp-route-pagina="@i" 
+              data-ajax="true"
+              data-ajax-method="GET"
+              data-ajax-mode="replace"
+              data-ajax-update="#gridTabla">@i</a></li>
+            }
+        }
+    </ul>
+    </nav>

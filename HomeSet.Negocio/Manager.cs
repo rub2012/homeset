@@ -162,9 +162,9 @@ namespace HomeSet.Negocio
             var resultado = new Resultado();
             try
             {
-                var evento = Mapper.Map<SubCategoria>(dto);
-                evento.Categoria = Repositorio.Obtener<Categoria>(dto.CategoriaId);
-                Repositorio.Actualizar(evento);
+                var subCategorias = Mapper.Map<SubCategoria>(dto);
+                subCategorias.Categoria = Repositorio.Obtener<Categoria>(dto.CategoriaId);
+                Repositorio.Actualizar(subCategorias);
                 Repositorio.GuardarCambios();
             }
             catch (Exception e)
@@ -204,6 +204,70 @@ namespace HomeSet.Negocio
 
             var subCategorias = Repositorio.Listar<SubCategoria>(expresionFiltro, paginacion);
             return MapearPaginado<SubCategoria, SubCategoriaDto>(subCategorias);
+
+        }
+
+        public Resultado AltaCategoria(CategoriaDto dto)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var Categoria = Mapper.Map<Categoria>(dto);
+                Repositorio.Agregar(Categoria);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
+
+        public Resultado ModificarCategoria(CategoriaDto dto)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                var categoria = Mapper.Map<Categoria>(dto);
+                Repositorio.Actualizar(categoria);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
+
+        public Resultado EliminarCategoria(int id)
+        {
+            var resultado = new Resultado();
+            try
+            {
+                Repositorio.Remover<Categoria>(id);
+                Repositorio.GuardarCambios();
+            }
+            catch (Exception e)
+            {
+                resultado.Error("", e.Message);
+            }
+            return resultado;
+        }
+
+
+        public ListaPaginada<CategoriaDto> ListarCategoriasPaginado(string filtro, Paginacion paginacion)
+        {
+            Expression<Func<Categoria, bool>> expresionFiltro = null;
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                filtro = filtro.Trim();
+                expresionFiltro =
+                    x =>
+                    x.Descripcion.Contains(filtro);
+            }
+
+            var Categorias = Repositorio.Listar<Categoria>(expresionFiltro, paginacion);
+            return MapearPaginado<Categoria, CategoriaDto>(Categorias);
 
         }
     }

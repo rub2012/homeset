@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Categorías";
+}
+<div id="main" class="">
+    <div class="row">
+        <form id = "search-form" asp-controller="Categoria" asp-action="Listar"
+              data-ajax="true"
+              data-ajax-method="GET"
+              data-ajax-mode="replace"
+              data-ajax-update="#gridTabla">
+            <div class="form-inline mb-2">
+                <label class="control-label mb-2 mr-sm-2 mb-sm-0" for="">Filtro</label>
+                <div class="mb-2 mr-sm-2 mb-sm-0">
+                    <input type="text" class="form-control" id="filtro" name="filtro" placeholder="">
+                </div>
+                <div class="mb-2 mr-sm-2 mb-sm-0">
+                    <button class="btn btn-primary" type="submit">Filtrar</button>
+                </div>
+
+            </div>
+        </form>
+        <div class="offset-lg-6">
+            <a class="btn btn-primary" data-toggle="modal" data-target="#modal-editar" data-href=@Url.Action("Crear","Categoria") data-titulo="Crear Categoría">Crear Categoría</a>
+        </div>
+    </div>
+    <div id="gridTabla" data-grid-url="@Url.Action("Listar","Categoria")">
+        @await Html.PartialAsync("Listar", ViewData)
+    </div>
+
+</div>

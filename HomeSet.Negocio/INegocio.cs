@@ -22,5 +22,9 @@ namespace HomeSet.Negocio
         Resultado AltaSubCategoria(SubCategoriaDto dto);
         Resultado ModificarSubCategoria(SubCategoriaDto dto);
         Resultado EliminarSubCategoria(int id);
+        ListaPaginada<CategoriaDto> ListarCategoriasPaginado(string filtro, Paginacion paginacion);
+        Resultado AltaCategoria(CategoriaDto dto);
+        Resultado ModificarCategoria(CategoriaDto dto);
+        Resultado EliminarCategoria(int id);
     }
 }
