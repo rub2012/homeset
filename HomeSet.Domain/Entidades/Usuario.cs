@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HomeSet.Domain.Entidades
 {
-    public class Usuario : IdentityUser
+    public class Usuario : IdentityUser<int>
     {
-        public override string Id { get; set; }
-        public override string UserName { get; set; }
-
+        public virtual string Nombre { get; set; }
+        public virtual string Apellido { get; set; }
     }
 }

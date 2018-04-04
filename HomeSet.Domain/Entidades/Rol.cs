@@ -2,10 +2,8 @@
 
 namespace HomeSet.Domain.Entidades
 {
-    public class Rol : IdentityRole
+    public class Rol : IdentityRole<int>
     {
-        public override string Id { get; set; }
-        //public override string Rol { get; set; }
 
     }
 }
