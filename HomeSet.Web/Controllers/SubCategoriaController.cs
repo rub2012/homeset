@@ -38,6 +38,7 @@ namespace HomeSet.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Crear(SubCategoriaDto dto)
         {
             if (ModelState.IsValid)
@@ -54,6 +55,7 @@ namespace HomeSet.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Modificar(SubCategoriaDto dto)
         {
             if (ModelState.IsValid)
@@ -86,6 +88,7 @@ namespace HomeSet.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Eliminar(int id)
         {
             var resultado = Negocio.EliminarSubCategoria(id);

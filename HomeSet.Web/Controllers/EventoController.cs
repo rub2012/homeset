@@ -31,7 +31,7 @@ namespace HomeSet.Controllers
             return View("Listar", ListQuery(filtro, pagina, ordenarPor, dirOrden));
         }
 
-        [HttpGet]
+        [HttpGet]        
         public IActionResult Index(string sortOrder, string searchString)
         {
             //ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -44,6 +44,7 @@ namespace HomeSet.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Crear(EventoDto dto)
         {
             if (ModelState.IsValid)
@@ -60,6 +61,7 @@ namespace HomeSet.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Modificar(EventoDto dto)
         {
             if (ModelState.IsValid)
@@ -94,6 +96,7 @@ namespace HomeSet.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Eliminar(int id)
         {
             var resultado = Negocio.EliminarEvento(id);
