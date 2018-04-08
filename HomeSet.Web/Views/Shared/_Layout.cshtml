@@ -49,10 +49,12 @@
             <div class="container">
                 <div class="navbar-header">
                     @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>*@
+                <span class="navbar-toggler-icon"></span>
+            </button>*@
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HomeSet</a>
                 </div>
+                @if (User.Identity.IsAuthenticated)
+    {
                 <div class="collapse navbar-collapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
@@ -69,7 +71,24 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Cuenta" asp-action="Logout">Log out</a>
+                        </li>
+                    </ul>
                 </div>
+}
+else
+{
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-area="" asp-controller="Cuenta" asp-action="Register">Register</a>
+                    </li>
+                </ul>
+            </div>
+
+}
             </div>
         </nav>
     </header>

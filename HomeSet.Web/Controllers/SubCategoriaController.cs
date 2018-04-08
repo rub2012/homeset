@@ -11,9 +11,11 @@ using System.Linq;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HomeSet.Controllers
 {
+    [Authorize]
     public class SubCategoriaController : Controller
     {
         private readonly INegocio Negocio;

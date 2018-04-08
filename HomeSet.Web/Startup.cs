@@ -3,11 +3,13 @@ using HomeSet.Domain;
 using HomeSet.Domain.Entidades;
 using HomeSet.Negocio;
 using HomeSet.Repositorio;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace HomeSet
 {
@@ -28,11 +30,36 @@ namespace HomeSet
             //    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
             //});
             services.AddDbContext<IdentityContext>();
-            services.AddIdentity<Usuario, Rol>()
+            services.AddIdentity<Usuario, Rol>(options => {
+                // Lockout settings
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+
+                // Password settings
+                //options.Password.RequireDigit = true;
+                //options.Password.RequiredLength = 8;
+                //options.Password.RequiredUniqueChars = 2;
+                //options.Password.RequireLowercase = true;
+                //options.Password.RequireNonAlphanumeric = true;
+                //options.Password.RequireUppercase = true;
+            })
                 .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Cuenta/AccessDenied";
+                options.Cookie.Name = "HomeSetCookie";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Cuenta/Login";
+                options.LogoutPath = "/Cuenta/Logout";
+                // ReturnUrlParameter requires `using Microsoft.AspNetCore.Authentication.Cookies;`
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
 
-                        
+
             services.AddAutoMapper(cfg => cfg.AddProfile<Mapeo>());
             services.AddDbContext<HomeContext>();
             services.AddScoped<IRepositorio>(provider => provider.GetService<HomeContext>());
@@ -64,6 +91,7 @@ namespace HomeSet
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
