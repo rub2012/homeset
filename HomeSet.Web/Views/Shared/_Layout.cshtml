@@ -83,10 +83,10 @@
                                         <a class="dropdown-item dropdown-toggle" href="#">Administración</a>
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a class="dropdown-item" asp-area="" asp-controller="Evento" asp-action="Index">Usuarios</a>
+                                                <a class="dropdown-item" asp-area="" asp-controller="Usuario" asp-action="Index">Usuarios</a>
                                             </li>
                                             <li>
-                                                <a class="dropdown-item" asp-area="" asp-controller="Categoria" asp-action="Index">Roles</a>
+                                                <a class="dropdown-item" asp-area="" asp-controller="Rol" asp-action="Index">Roles</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -166,6 +166,7 @@ else
                 <div class="modal-footer">
                     <button id="modal-eliminar-cancelar" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button id="modal-eliminar-confirmar" type="button" class="btn btn-danger" data-href="">Confirmar</button>
+                    @Html.AntiForgeryToken()
                 </div>
             </div>
         </div>

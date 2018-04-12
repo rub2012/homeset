@@ -20,6 +20,11 @@ namespace HomeSet.Domain
             CreateMap<SubCategoria, SubCategoriaDto>()
                 .ForMember(x => x.CategoriaDescripcion, x => x.MapFrom(s => s.Categoria.Descripcion));
             CreateMap<SubCategoriaDto, SubCategoria>();
+
+            CreateMap<Rol, RolDto>()
+                .ForMember(x => x.Nombre, x => x.MapFrom(s => s.Name));
+            CreateMap<RolDto, Rol>()
+                .ForMember(x => x.Name, x => x.MapFrom(s => s.Nombre));
         }
     }
 }

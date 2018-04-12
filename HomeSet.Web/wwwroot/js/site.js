@@ -36,7 +36,8 @@
     })
 
     $('#modal-eliminar-confirmar').on('click', function () {
-        $.post($(this).attr('data-href'), function (data) { /*Post to action*/
+        var token = $(this).parent().find('input[name="__RequestVerificationToken"]').val()
+        $.post($(this).attr('data-href'), { __RequestVerificationToken: token}, function (data) { /*Post to action*/
             if (data == 'true') {
                 MostrarAlertaExitosa();
             } else {
