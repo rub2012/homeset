@@ -47,6 +47,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Abm")]
         public IActionResult Crear(EventoDto dto)
         {
             if (ModelState.IsValid)
