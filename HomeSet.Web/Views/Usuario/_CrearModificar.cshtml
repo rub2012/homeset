@@ -1,0 +1,41 @@
+﻿@model UsuarioDto
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+    <label class="col-sm-2 control-label" asp-for="Nombre"></label>
+    <div class="col-sm-11">
+        <input asp-for="Nombre" class="form-control"/>
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label" asp-for="Apellido"></label>
+    <div class="col-sm-11">
+        <input asp-for="Apellido" class="form-control"/>
+        <span asp-validation-for="Apellido" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label" asp-for="Username"></label>
+    <div class="col-sm-11">
+        <input asp-for="Username" class="form-control" id="userInput"/>
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2 control-label" asp-for="Password"></label>
+    <div class="col-sm-11">
+        <input asp-for="Password" class="form-control" id="passwordInput"/>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group" >
+    <label class="col-sm-5 control-label" asp-for="ConfirmPassword"></label>
+    <div class="col-sm-11">
+        <input asp-for="ConfirmPassword" class="form-control" data-rule-equalTo="#Password" id="passwordConfirmInput" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+</div>
+
+
+

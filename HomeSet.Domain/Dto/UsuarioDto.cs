@@ -7,6 +7,7 @@ namespace HomeSet.Domain.Dto
 {
     public class UsuarioDto
     {
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Nombre")]
         public string Nombre { get; set; }
@@ -15,12 +16,10 @@ namespace HomeSet.Domain.Dto
         [Display(Name = "Usuario")]
         public string Username { get; set; }
 
-        [Required]
         [Display(Name = "Contraseña")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
         [Display(Name = "Confirmar Contraseña")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }

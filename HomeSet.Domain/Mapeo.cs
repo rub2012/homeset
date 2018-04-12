@@ -25,6 +25,9 @@ namespace HomeSet.Domain
                 .ForMember(x => x.Nombre, x => x.MapFrom(s => s.Name));
             CreateMap<RolDto, Rol>()
                 .ForMember(x => x.Name, x => x.MapFrom(s => s.Nombre));
+
+            CreateMap<Usuario, UsuarioDto>();
+            CreateMap<UsuarioDto, Usuario>();
         }
     }
 }

@@ -1,0 +1,13 @@
+﻿@model UsuarioDto
+@{
+    Layout = null;
+    ViewData["Title"] = "Modificar Usuario";
+}
+<script src="~/js/validaciones.min.js" asp-append-version="true"></script>
+<script src="~/js/usuarioModificar.js" asp-append-version="true"></script>
+<form asp-controller="Usuario" asp-action="Modificar"
+      data-ajax="true"
+      data-ajax-method="POST">
+    @await Html.PartialAsync("_CrearModificar", Model)
+
+</form>
