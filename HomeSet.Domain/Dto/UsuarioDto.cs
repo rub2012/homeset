@@ -6,7 +6,7 @@ using System.Text;
 namespace HomeSet.Domain.Dto
 {
     public class UsuarioDto
-    {
+    {             
         public int Id { get; set; }
         [Required]
         [Display(Name = "Nombre")]
@@ -26,5 +26,7 @@ namespace HomeSet.Domain.Dto
 
         [Display(Name = "Apellido")]
         public string Apellido { get; set; }
+
+        public string SecurityStamp { get; set; }
     }
 }

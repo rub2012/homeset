@@ -32,10 +32,11 @@
 <div class="form-group" >
     <label class="col-sm-5 control-label" asp-for="ConfirmPassword"></label>
     <div class="col-sm-11">
-        <input asp-for="ConfirmPassword" class="form-control" data-rule-equalTo="#Password" id="passwordConfirmInput" />
+        <input asp-for="ConfirmPassword" class="form-control" data-rule-equalTo="#passwordInput" id="passwordConfirmInput" />
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 </div>
+@*<input asp-for="SecurityStamp" type="hidden" />*@
 
 
 

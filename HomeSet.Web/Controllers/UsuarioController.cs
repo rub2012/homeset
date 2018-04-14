@@ -78,7 +78,10 @@ namespace HomeSet.Controllers
             if (ModelState.IsValid)
             {
                 //var user = new Usuario { UserName = dto.Username, Apellido = dto.Apellido, Nombre = dto.Nombre };
-                var user = Mapper.Map<Usuario>(dto);
+                //var user = Mapper.Map<Usuario>(dto);
+                var user = await UserManager.FindByIdAsync(dto.Id.ToString());
+                user.Nombre = dto.Nombre;
+                user.Apellido = dto.Apellido;
                 if (!string.IsNullOrEmpty(dto.Password))
                 {
                     var resetToken = await UserManager.GeneratePasswordResetTokenAsync(user);
@@ -89,12 +92,12 @@ namespace HomeSet.Controllers
                         return View(dto);
                     }
                 }
-                var resultado = await UserManager.UpdateAsync(user);
-                if (resultado.Succeeded)
-                {
-                    return new AjaxEditSuccessResult();
-                }
-                AddErrors(resultado);
+                    var resultado = await UserManager.UpdateAsync(user);
+                    if (resultado.Succeeded)
+                    {
+                        return new AjaxEditSuccessResult();
+                    }
+                    AddErrors(resultado);
             }
             return View(dto);
         }
