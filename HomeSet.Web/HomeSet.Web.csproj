@@ -3,7 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>2924c022-8d5d-4107-85dc-5b7ab507179b</UserSecretsId>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\ts\require-config.ts" />
+    <Content Remove="wwwroot\ts\rol.ts" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
@@ -19,6 +25,11 @@
   <ItemGroup>
     <ProjectReference Include="..\HomeSet.Domain\HomeSet.Domain.csproj" />
     <ProjectReference Include="..\HomeSet.Negocio\HomeSet.Negocio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\ts\require-config.ts" />
+    <TypeScriptCompile Include="wwwroot\ts\rol.ts" />
   </ItemGroup>
 
 </Project>
