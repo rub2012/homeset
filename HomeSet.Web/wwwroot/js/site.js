@@ -88,13 +88,13 @@ function cargarModalEditar(data) {
 
 function attachDatePickers() {
     $('input.date').each(function () {
-            var $this = $(this);
+        var $this = $(this);
         $this.datetimepicker({
             timepicker: false,
             format: 'd/m/Y H:m',
-            lang: 'es'
         });
     });
+    $.datetimepicker.setLocale('es');
     //$('#datetimepicker1').datetimepicker();
         //{ format: 'yyyy-MM-ddThh:mm' }
     

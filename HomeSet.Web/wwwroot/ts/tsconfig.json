@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "outDir": "../js/",
     "noImplicitAny": true,
     "noEmitOnError": true,

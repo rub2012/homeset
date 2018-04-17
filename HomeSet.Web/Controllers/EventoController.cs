@@ -47,7 +47,8 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Abm")]
+        [Authorize]
+        //[Authorize(Roles = "Abm")]
         public IActionResult Crear(EventoDto dto)
         {
             if (ModelState.IsValid)
@@ -65,6 +66,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Modificar(EventoDto dto)
         {
             if (ModelState.IsValid)
@@ -100,6 +102,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult Eliminar(int id)
         {
             var resultado = Negocio.EliminarEvento(id);

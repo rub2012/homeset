@@ -1,5 +1,5 @@
-﻿/// <reference path="../lib/knockout/dist/knockout.js" />
-import * as ko from "../lib/knockout/dist/";
+﻿///// <reference path="../lib/knockout/dist/knockout.js" />
+import * as ko from "knockout";
 
 class RolViewModel {
     language: KnockoutObservable<string>

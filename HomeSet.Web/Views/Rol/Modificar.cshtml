@@ -4,7 +4,9 @@
     ViewData["Title"] = "Modificar Rol";
 }
 @Html.Hidden("Modificando", true)
-<script src="~/js/validaciones.min.js" asp-append-version="true"></script>
+<script src="~/lib/jquery.validate.js"></script>
+<script src="~/lib/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/messages_es_AR.min.js"></script>
 @*<script src="~/js/eventosCrearModificar.js" asp-append-version="true"></script>*@
 <form asp-controller="Rol" asp-action="Modificar"
       data-ajax="true"

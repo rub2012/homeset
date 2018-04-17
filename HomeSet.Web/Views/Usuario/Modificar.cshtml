@@ -3,8 +3,10 @@
     Layout = null;
     ViewData["Title"] = "Modificar Usuario";
 }
-<script src="~/js/validaciones.min.js" asp-append-version="true"></script>
-<script src="~/lib/knockout/dist/knockout.js"></script>
+<script src="~/lib/jquery.validate.js"></script>
+<script src="~/lib/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/messages_es_AR.min.js"></script>
+@*<script src="~/lib/knockout/dist/knockout.js"></script>*@
 <script src="~/js/usuarioModificar.js" asp-append-version="true"></script>
 <form asp-controller="Usuario" asp-action="Modificar"
       data-ajax="true"
