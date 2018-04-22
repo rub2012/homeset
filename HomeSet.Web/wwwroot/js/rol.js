@@ -1,13 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-///// <reference path="../lib/knockout/dist/knockout.js" />
 var ko = require("knockout");
-var RolViewModel = /** @class */ (function () {
-    function RolViewModel(language, framework) {
-        this.language = ko.observable(language);
-        this.framework = ko.observable(framework);
+var $ = require("jquery");
+//import * as usuariojs from "usuarioCrear.js";
+var Rol = /** @class */ (function () {
+    function Rol(id, nombre) {
+        this.id = ko.observable(id);
+        this.nombre = ko.observable(nombre);
     }
+    return Rol;
+}());
+var RolViewModel = /** @class */ (function () {
+    function RolViewModel() {
+        this.roles = ko.observableArray();
+    }
+    RolViewModel.prototype.addRol = function () {
+        if ($('#rol option:selected').text() > "") {
+            this.roles.push(new Rol(Number($('#rol option:selected').val()), $('#rol option:selected').text()));
+            //inhabilito la opcion
+            $("#rol option:selected").attr('disabled', 'disabled');
+            //this.setearDropDownRolSelected();
+        }
+        $('#rolesFinales').val(ko.toJSON(this.roles));
+    };
     return RolViewModel;
 }());
-ko.applyBindings(new RolViewModel("TypeScript", "Knockout"));
+ko.applyBindings(new RolViewModel());
 //# sourceMappingURL=rol.js.map
