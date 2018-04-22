@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\ts\require-config.ts" />
     <Content Remove="wwwroot\ts\rol.ts" />
+    <Content Remove="wwwroot\ts\usuarioCrearModificar.d.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,6 +31,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\ts\require-config.ts" />
     <TypeScriptCompile Include="wwwroot\ts\rol.ts" />
+    <TypeScriptCompile Include="wwwroot\ts\usuarioCrearModificar.d.ts" />
   </ItemGroup>
 
 </Project>

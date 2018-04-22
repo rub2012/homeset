@@ -1,5 +1,10 @@
-﻿import * as ko from "knockout";
+﻿/// <reference path="usuarioCrearModificar.d.ts"/>
+import * as ko from "knockout";
 import * as $ from "jquery";
+import * as util from "Musuario";
+//import { Utils, setearDropDownRolSelected } from "Musuario";
+
+//declare function setearDropDownRolSelected(): any;
 //import * as usuariojs from "usuarioCrear.js";
 
 class Rol
@@ -28,26 +33,12 @@ class RolViewModel
             this.roles.push(new Rol(Number($('#rol option:selected').val()), $('#rol option:selected').text()));
             //inhabilito la opcion
             $("#rol option:selected").attr('disabled', 'disabled');
-            //this.setearDropDownRolSelected();
+            util.setearDropDownRolSelected();
         }
         $('#rolesFinales').val(ko.toJSON(this.roles));
 
     }
 
-    //setearDropDownRolSelected()
-    //{
-    //    let seleccionado = false;
-    //    $.each($("#rol option"), function (index, value) {
-    //        if (value.) {
-    //            value.selected = false;
-    //        } else {
-    //            if (!seleccionado) {
-    //                value.selected = true;
-    //                seleccionado = true;
-    //            }
-    //        }
-    //    });
-    //}
 }
 
 ko.applyBindings(new RolViewModel());

@@ -1,7 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/// <reference path="usuarioCrearModificar.d.ts"/>
 var ko = require("knockout");
 var $ = require("jquery");
+var util = require("Musuario");
+//import { Utils, setearDropDownRolSelected } from "Musuario";
+//declare function setearDropDownRolSelected(): any;
 //import * as usuariojs from "usuarioCrear.js";
 var Rol = /** @class */ (function () {
     function Rol(id, nombre) {
@@ -19,7 +23,7 @@ var RolViewModel = /** @class */ (function () {
             this.roles.push(new Rol(Number($('#rol option:selected').val()), $('#rol option:selected').text()));
             //inhabilito la opcion
             $("#rol option:selected").attr('disabled', 'disabled');
-            //this.setearDropDownRolSelected();
+            util.setearDropDownRolSelected();
         }
         $('#rolesFinales').val(ko.toJSON(this.roles));
     };

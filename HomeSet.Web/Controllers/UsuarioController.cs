@@ -14,6 +14,7 @@ using System;
 using AutoMapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HomeSet.Controllers
 {
@@ -68,6 +69,7 @@ namespace HomeSet.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
+            CargarRoles();
             return View();
         }
 
@@ -106,6 +108,7 @@ namespace HomeSet.Controllers
         public async Task<IActionResult> Modificar(int id)
         {
             var usuario = await UserManager.FindByIdAsync(id.ToString());
+            CargarRoles();
             var dto = Mapper.Map<UsuarioDto>(usuario);
             return View(dto);
         }
@@ -162,6 +165,34 @@ namespace HomeSet.Controllers
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
+        }
+
+        private void CargarRoles()
+        {
+            var roles = RoleManager.Roles;
+            ViewBag.CargarRoles = roles.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Name }).ToList();
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> ObtenerRoles(int id)
+        {
+            if (id == 0)
+            {
+                return Json(null);
+            }
+            else
+            {
+                var roles = new List<Rol>();
+                var usuario = await UserManager.FindByIdAsync(id.ToString());
+                var rolesString = await UserManager.GetRolesAsync(usuario);
+                foreach (var rol in rolesString)
+                {
+                    roles.Add(await RoleManager.FindByNameAsync(rol));
+                }
+                var rolesret = roles.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Name }).ToList();
+                return Json(rolesret);
+            }
+            
         }
     }
 }

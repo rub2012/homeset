@@ -27,6 +27,9 @@ namespace HomeSet.Domain.Dto
         [Display(Name = "Apellido")]
         public string Apellido { get; set; }
 
+        [Display(Name = "Roles")]
+        public IList<string> Roles { get; set; }
+
         public string SecurityStamp { get; set; }
     }
 }
