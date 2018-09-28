@@ -7,9 +7,17 @@
 <script src="~/lib/jquery.validate.js"></script>
 <script src="~/lib/jquery.validate.unobtrusive.js"></script>
 <script src="~/lib/messages_es_AR.min.js"></script>
-@*<script src="~/lib/knockout/dist/knockout.js"></script>*@
+@*<script src="~/js/require-config.js" asp-append-version="true"></script>*@
 <script src="~/js/usuarioCrearModificar.js" asp-append-version="true"></script>
-<script src="~/js/rol.js" asp-append-version="true"></script>
+<script src="~/lib/require.js"></script>
+<script>
+    //exports = {};
+    require(["js/rol"]);
+</script>
+
+@*<script src="~/lib/knockout-latest.js"></script>*@
+@*<script src="~/js/rol.js" asp-append-version="true"></script>*@
+
 <form asp-controller="Usuario" asp-action="Crear"
       data-ajax="true"
       data-ajax-method="POST">

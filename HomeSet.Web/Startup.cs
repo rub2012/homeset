@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,9 +16,11 @@ namespace HomeSet
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private IHostingEnvironment _env;
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -64,8 +67,18 @@ namespace HomeSet
             services.AddDbContext<HomeContext>();
             services.AddScoped<IRepositorio>(provider => provider.GetService<HomeContext>());
             services.AddScoped<INegocio, Manager>();
-
-            services.AddMvc();
+            if (_env.IsDevelopment())
+            {
+                services.AddMvc(opts =>
+                {
+                    opts.Filters.Add(new AllowAnonymousFilter());
+                });
+            }
+            else
+            {
+                services.AddMvc();
+            }
+            //services.AddMvc();
             //services.AddEntityFrameworkProxies();
             //services.AddAntiforgery(options =>
             //{

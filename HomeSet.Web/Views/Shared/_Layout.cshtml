@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HomeSet</title>
     @*<script src="~/lib/globalize/dist/globalize.js"></script>
-    <script src="~/lib/globalize/dist/globalize/date.js"></script>
-    <script src="~/lib/globalize/dist/globalize/message.js"></script>
-    <script src="~/lib/globalize/dist/globalize/number.js"></script>*@
+        <script src="~/lib/globalize/dist/globalize/date.js"></script>
+        <script src="~/lib/globalize/dist/globalize/message.js"></script>
+        <script src="~/lib/globalize/dist/globalize/number.js"></script>*@
     <script type="text/javascript">
-            var ajaxEditSuccess = 'ajax-edit-success';
-            //Globalize.culture("es");
-            //var btn = $.fn.button.noConflict(); // reverts $.fn.button to jqueryui btn
-            //$.fn.btn = btn; // assigns bootstrap button functionality to $.fn.btn
+        var ajaxEditSuccess = 'ajax-edit-success';
+                //Globalize.culture("es");
+                //var btn = $.fn.button.noConflict(); // reverts $.fn.button to jqueryui btn
+                //$.fn.btn = btn; // assigns bootstrap button functionality to $.fn.btn
     </script>
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap.min.css" />
@@ -42,6 +42,7 @@
         <script src="~/lib/jquery.unobtrusive-ajax.min.js"></script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+    @*@RenderSection("Styles", required: false)*@
 </head>
 <body>
     <header>
@@ -53,8 +54,8 @@
             </button>*@
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HomeSet</a>
                 </div>
-                @if (User.Identity.IsAuthenticated)
-    {
+                @*@if (User.Identity.IsAuthenticated)
+    {*@
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -100,7 +101,7 @@
                 </li>
             </ul>
             </div>
-}
+@*}
 else
 {
             <div class="collapse navbar-collapse">
@@ -111,7 +112,7 @@ else
                 </ul>
             </div>
 
-}
+}*@
             </div>
         </nav>
     </header>

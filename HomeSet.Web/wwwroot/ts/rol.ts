@@ -1,11 +1,9 @@
 ﻿/// <reference path="usuarioCrearModificar.d.ts"/>
-import * as ko from "knockout";
-import * as $ from "jquery";
-import * as util from "Musuario";
-//import { Utils, setearDropDownRolSelected } from "Musuario";
 
-//declare function setearDropDownRolSelected(): any;
-//import * as usuariojs from "usuarioCrear.js";
+//import * as ko from "knockout";
+import ko = require("knockout");
+//import * as $ from "jquery";
+//import * as util from "Musuario";
 
 class Rol
 {
@@ -20,7 +18,7 @@ class Rol
 
 class RolViewModel
 {
-    roles: KnockoutObservable<Rol[]>
+    roles: KnockoutObservableArray<Rol>
 
     constructor()
     {
@@ -33,7 +31,7 @@ class RolViewModel
             this.roles.push(new Rol(Number($('#rol option:selected').val()), $('#rol option:selected').text()));
             //inhabilito la opcion
             $("#rol option:selected").attr('disabled', 'disabled');
-            util.setearDropDownRolSelected();
+            //util.setearDropDownRolSelected();
         }
         $('#rolesFinales').val(ko.toJSON(this.roles));
 
@@ -42,3 +40,5 @@ class RolViewModel
 }
 
 ko.applyBindings(new RolViewModel());
+
+//# sourceURL=rol.js

@@ -1,16 +1,19 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "outDir": "../js/",
     "noImplicitAny": true,
     "noEmitOnError": true,
     "removeComments": false,
     "sourceMap": true,
-    "target": "es5"
+    "target": "es6",
+    "module": "amd"
+    //"moduleResolution": "node"
   },
   "exclude": [
     "node_modules",
     "wwwroot"
-  ],
-  "compileOnSave": true
+  ]
+
 
 }

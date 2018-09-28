@@ -10,7 +10,8 @@ const JS = [
     'jquery-validation-unobtrusive/jquery.validate.unobtrusive.js',
     'jquery-validation/dist/localization/messages_es_AR.min.js',
     'jquery-datetimepicker/build/jquery.datetimepicker.full.js',
-    'knockout/build/output/knockout-latest.js'
+    'knockout/build/output/knockout-latest.js',
+    'requirejs/require.js'
 ];
 
 module.exports = [...JS, ...CSS];
