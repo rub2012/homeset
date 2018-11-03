@@ -1,1 +1,1 @@
-{"version":3,"file":"require-config.js","sourceRoot":"","sources":["../ts/require-config.ts"],"names":[],"mappings":"AACA,OAAO,CAAC,MAAM,CAAC;IACX,OAAO,EAAC,KAAK;IACb,KAAK,EAAE;QACH,UAAU,EAAE,2BAA2B;KAC1C;CACJ,CAAC,CAAC"}
+{"version":3,"file":"require-config.js","sourceRoot":"","sources":["../ts/require-config.ts"],"names":[],"mappings":"AACA,OAAO,CAAC,MAAM,CAAC;IACX,KAAK,EAAE;QACH,UAAU,EAAE,wBAAwB;KACvC;CACJ,CAAC,CAAC"}

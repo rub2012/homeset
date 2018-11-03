@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "NPM manager",
   "scripts": {
-    "start": "webpack --config webpack.config.js --watch --progress --profile",
-    "build": "webpack --config webpack.config.js",
-    "webpack": "webpack"
+    "start": "npm run build"
   },
   "author": "",
   "license": "ISC",

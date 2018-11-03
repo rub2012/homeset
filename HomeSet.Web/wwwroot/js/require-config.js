@@ -1,7 +1,6 @@
 require.config({
-    baseUrl: 'ts/',
     paths: {
-        "knockout": "../lib/knockout-latest.js",
+        "knockout": "../lib/knockout-latest",
     }
 });
 //# sourceMappingURL=require-config.js.map
