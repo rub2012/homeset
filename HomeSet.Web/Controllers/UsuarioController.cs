@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using HomeSet.Models;
-using HomeSet.Negocio;
 using HomeSet.Domain.Dto;
 using HomeSet.Domain.Entidades;
 using HomeSet.Domain;
@@ -15,6 +14,8 @@ using AutoMapper;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace HomeSet.Controllers
 {
@@ -79,11 +80,21 @@ namespace HomeSet.Controllers
         {
             if (ModelState.IsValid)
             {
+                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson);
                 //var user = new Usuario { UserName = dto.Username, Apellido = dto.Apellido, Nombre = dto.Nombre };
                 //var user = Mapper.Map<Usuario>(dto);
                 var user = await UserManager.FindByIdAsync(dto.Id.ToString());
                 user.Nombre = dto.Nombre;
                 user.Apellido = dto.Apellido;
+
+                foreach(var rol in roles)
+                {
+                    if (await RoleManager.RoleExistsAsync(rol.Nombre))
+                    {
+                        await UserManager.AddToRoleAsync(user, rol.Nombre);
+                    }
+                }
+
                 if (!string.IsNullOrEmpty(dto.Password))
                 {
                     var resetToken = await UserManager.GeneratePasswordResetTokenAsync(user);
