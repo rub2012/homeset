@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,11 +73,13 @@ namespace HomeSet
                 services.AddMvc(opts =>
                 {
                     opts.Filters.Add(new AllowAnonymousFilter());
-                });
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             }
             else
             {
-                services.AddMvc();
+                services.AddMvc()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             }
             //services.AddMvc();
             //services.AddEntityFrameworkProxies();
@@ -96,13 +99,15 @@ namespace HomeSet
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseMvc(routes =>

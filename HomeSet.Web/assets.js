@@ -11,7 +11,8 @@ const JS = [
     'jquery-validation/dist/localization/messages_es_AR.min.js',
     'jquery-datetimepicker/build/jquery.datetimepicker.full.js',
     'knockout/build/output/knockout-latest.js',
-    'requirejs/require.js'
+    'requirejs/require.js',
+    'popper.js/dist/popper.min.js'
 ];
 
 module.exports = [...JS, ...CSS];

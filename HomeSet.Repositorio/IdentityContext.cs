@@ -1,9 +1,7 @@
 ﻿using HomeSet.Domain.Entidades;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
 
 namespace HomeSet.Repositorio
 {
