@@ -10,8 +10,12 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.nombre = ko.observable(nombre);
         }
     }
+    exports.Rol = Rol;
     class RolViewModel {
         constructor() {
+            this.removeRol = (rol) => {
+                this.roles.remove(rol);
+            };
             this.roles = ko.observableArray();
         }
         addRol() {
@@ -24,6 +28,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             $('#rolesFinales').val(ko.toJSON(this.roles));
         }
     }
+    exports.RolViewModel = RolViewModel;
     ko.applyBindings(new RolViewModel());
 });
 //# sourceURL=rol.js

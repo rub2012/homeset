@@ -5,7 +5,7 @@ import ko = require("knockout");
 //import * as $ from "jquery";
 //import * as util from "Musuario";
 
-class Rol
+export class Rol
 {
     id: KnockoutObservable<number>
     nombre: KnockoutObservable<string>
@@ -16,16 +16,15 @@ class Rol
     }
 }
 
-class RolViewModel
+export class RolViewModel
 {
     roles: KnockoutObservableArray<Rol>
-
     constructor()
     {
         this.roles = ko.observableArray()
     }
 
-    addRol()
+    addRol() : void
     {
         if ($('#rol option:selected').text() > "") {
             this.roles.push(new Rol(Number($('#rol option:selected').val()), $('#rol option:selected').text()));
@@ -35,6 +34,11 @@ class RolViewModel
         }
         $('#rolesFinales').val(ko.toJSON(this.roles));
 
+    }
+
+    removeRol = (rol: Rol) : void =>
+    {
+        this.roles.remove(rol);   
     }
 
 }
