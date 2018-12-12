@@ -24,11 +24,13 @@ namespace HomeSet.Controllers
     {
         private readonly UserManager<Usuario> UserManager;
         private readonly RoleManager<Rol> RoleManager;
+        private readonly IMapper Mapper;
 
-        public UsuarioController(UserManager<Usuario> userManager, RoleManager<Rol> roleManager)
+        public UsuarioController(UserManager<Usuario> userManager, RoleManager<Rol> roleManager,IMapper mapper)
         {
             UserManager = userManager;
             RoleManager = roleManager;
+            Mapper = mapper;
         }
 
         //[ValidateAntiForgeryToken]

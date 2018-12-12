@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -23,7 +22,7 @@ namespace HomeSet.Repositorio
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseLazyLoadingProxies(false);
-            optionsBuilder.UseMySQL(Configuration["ConnectionStrings:MysqlDB"]);
+            optionsBuilder.UseMySql(Configuration["ConnectionStrings:MysqlDB"]);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

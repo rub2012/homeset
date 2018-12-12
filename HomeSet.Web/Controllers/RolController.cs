@@ -21,10 +21,12 @@ namespace HomeSet.Controllers
     public class RolController : Controller
     {
         private readonly RoleManager<Rol> RoleManager;
+        private readonly IMapper Mapper;
 
-        public RolController(RoleManager<Rol> roleManager)
+        public RolController(RoleManager<Rol> roleManager, IMapper mapper)
         {
             RoleManager = roleManager;
+            Mapper = mapper;
         }
 
         //[ValidateAntiForgeryToken]

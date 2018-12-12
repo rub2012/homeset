@@ -16,7 +16,7 @@ namespace HomeSet.Repositorio
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySQL(Configuration["ConnectionStrings:IdentityDB"],b => b.MigrationsAssembly("HomeSet.Web"));
+            optionsBuilder.UseMySql(Configuration["ConnectionStrings:IdentityDB"],b => b.MigrationsAssembly("HomeSet.Web"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
