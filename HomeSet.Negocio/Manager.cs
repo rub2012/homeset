@@ -81,7 +81,7 @@ namespace HomeSet.Negocio
 
         public IEnumerable<SubCategoriaDto> ListarSubCategoriasPorCategoriaId(int categoriaId)
         {
-            var subCategorias = Repositorio.Listar<SubCategoria>(x => x.Categoria.Id == categoriaId,(int?) null, false);
+            var subCategorias = Repositorio.Listar<SubCategoria>(x => x.Categoria.Id == categoriaId,(int?) null);
             return Mapper.Map<IEnumerable<SubCategoriaDto>>(subCategorias);
         }
 

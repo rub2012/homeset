@@ -16,6 +16,7 @@ namespace HomeSet.Repositorio
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseMySql(Configuration["ConnectionStrings:IdentityDB"],b => b.MigrationsAssembly("HomeSet.Web"));
         }
 

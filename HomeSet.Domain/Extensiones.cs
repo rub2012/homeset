@@ -49,50 +49,15 @@ namespace HomeSet.Domain
             loader?.Invoke(entity, navigationName);
 
             return navigationField;
-        }
+        }        
 
-        public static IQueryable<TEntity> LoadRelated<TEntity>(this IQueryable<TEntity> source,bool cargar = true) where TEntity : class
+        public static void AgregarErrores(this ModelStateDictionary estado, Resultado resultado)
         {
-            if (cargar)
-            {
-                var tipo = typeof(TEntity);
-                if (tipo == typeof(Evento))
-                {
-                    var source2 = source as IQueryable<Evento>;
-                    source2 = source2.Include(s => s.SubCategoria).ThenInclude(s => s.Categoria);
-                    return source2 as IQueryable<TEntity>;
-                }
-                else if (tipo == typeof(SubCategoria))
-                {
-                    var source2 = source as IQueryable<SubCategoria>;
-                    source2 = source2.Include(s => s.Categoria);
-                    return source2 as IQueryable<TEntity>;
-                }
-                else
-                {
-                    return source;
-                }
-                //else if (tipo == typeof(Categoria))
-                //{
-                //    var source2 = source as IQueryable<Categoria>;
-                //    source2.Include(s => s.).ThenInclude(s => s.Categoria);
-                //    return source2 as IQueryable<TEntity>;
-                //}
-            }
-            else
-            {
-                return source;
-            }
-
+             foreach (var error in resultado.Errores)
+             {
+                 estado.AddModelError(error.Key, error.Value);
+             }
         }
-
-            public static void AgregarErrores(this ModelStateDictionary estado, Resultado resultado)
-            {
-                foreach (var error in resultado.Errores)
-                {
-                    estado.AddModelError(error.Key, error.Value);
-                }
-            }
 
     }
 }

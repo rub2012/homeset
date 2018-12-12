@@ -21,7 +21,7 @@ namespace HomeSet.Repositorio
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseLazyLoadingProxies(false);
+            optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseMySql(Configuration["ConnectionStrings:MysqlDB"]);
         }
 
@@ -31,7 +31,6 @@ namespace HomeSet.Repositorio
 
             //Se mapean todas las entidades bajo el namespace Molinos.Scato.Dominio.Entidades      
             MapearAssemblyDe<Evento>(modelBuilder, x => x.Namespace == typeof(Evento).Namespace, excluir: null);
-            //modelBuilder.Entity<Evento>().HasOne(s => s.SubCategoria);
 
         }
 
@@ -47,10 +46,9 @@ namespace HomeSet.Repositorio
             }
         }
 
-        public TEntity Obtener<TEntity>(int id,bool cargarRelated = true) where TEntity : class, IIdentificable
+        public TEntity Obtener<TEntity>(int id) where TEntity : class, IIdentificable
         {
-            //return Find<TEntity>(id);            
-            return Set<TEntity>().LoadRelated(cargarRelated).SingleOrDefault(s => s.Id == id);
+            return Find<TEntity>(id);
         }
 
         public EntityEntry<TEntity> Agregar<TEntity>(TEntity entidad) where TEntity : class
@@ -73,19 +71,19 @@ namespace HomeSet.Repositorio
             return Update(entidad);
         }
 
-        public IEnumerable<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion = null, int? maxResultados = null, bool cargarRelated = true) where TEntity : class
+        public IEnumerable<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion = null, int? maxResultados = null) where TEntity : class
         {
             IQueryable<TEntity> resultado = Set<TEntity>();
             if (condicion != null)
             {
                 resultado = resultado.Where(condicion);
             }
-            return maxResultados.HasValue ? resultado.Take(maxResultados.Value).LoadRelated(cargarRelated) : resultado.LoadRelated(cargarRelated);
+            return maxResultados.HasValue ? resultado.Take(maxResultados.Value) : resultado;
         }
 
-        public ListaPaginada<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion, Paginacion paginacion,bool cargarRelated = true) where TEntity : class
+        public ListaPaginada<TEntity> Listar<TEntity>(Expression<Func<TEntity, bool>> condicion, Paginacion paginacion) where TEntity : class
         {
-            IQueryable<TEntity> resultados = Set<TEntity>();//as IQueryable<Evento>;
+            IQueryable<TEntity> resultados = Set<TEntity>();
             if (condicion != null)
             {
                 resultados = resultados.Where(condicion);
@@ -98,12 +96,8 @@ namespace HomeSet.Repositorio
                 resultados.OrderBy<TEntity>(paginacion.OrdenarPor, paginacion.DireccionOrden == DirOrden.Asc);
             }
 
-            resultados = resultados.Skip((paginacion.Pagina - 1) * paginacion.ItemsPorPagina).Take(paginacion.ItemsPorPagina);// as IQueryable<Evento>;
-            resultados = resultados.LoadRelated(cargarRelated);
-            //resultados2 = resultados2.Include(s => s.SubCategoria).ThenInclude(s => s.Categoria);
-            //resultados = resultados2 as IQueryable<TEntity>;
-            //resultados = resultados.Include("");
-            //var s = GetNaviProps(typeof(TEntity));
+            resultados = resultados.Skip((paginacion.Pagina - 1) * paginacion.ItemsPorPagina).Take(paginacion.ItemsPorPagina);
+
 
             return new ListaPaginada<TEntity>(resultados.ToList(), paginacion.Pagina, paginacion.ItemsPorPagina, itemsTotales);
         }
