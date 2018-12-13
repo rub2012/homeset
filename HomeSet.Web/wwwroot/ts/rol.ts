@@ -38,7 +38,8 @@ export class RolViewModel
 
     removeRol = (rol: Rol) : void =>
     {
-        this.roles.remove(rol);   
+        this.roles.remove(rol);
+        $('#rolesFinales').val(ko.toJSON(this.roles));
     }
 
 }

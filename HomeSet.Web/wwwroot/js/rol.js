@@ -15,6 +15,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
         constructor() {
             this.removeRol = (rol) => {
                 this.roles.remove(rol);
+                $('#rolesFinales').val(ko.toJSON(this.roles));
             };
             this.roles = ko.observableArray();
         }

@@ -58,8 +58,16 @@ namespace HomeSet.Controllers
             }
             if (ModelState.IsValid)
             {
+                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson);
                 var user = Mapper.Map<Usuario>(dto);
                 var resultado = await UserManager.CreateAsync(user, dto.Password);
+                foreach (var rol in roles)
+                {
+                    if (await RoleManager.RoleExistsAsync(rol.Nombre))
+                    {
+                        await UserManager.AddToRoleAsync(user, rol.Nombre);
+                    }
+                }
                 if (resultado.Succeeded)
                 {
                     return new AjaxEditSuccessResult();
@@ -73,7 +81,7 @@ namespace HomeSet.Controllers
         public IActionResult Crear()
         {
             CargarRoles();
-            return View();
+            return View(new UsuarioDto());
         }
 
         [HttpPost]
