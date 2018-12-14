@@ -5,7 +5,6 @@
         var filtro = $("#filtro").val();
         var href = $(this).attr('href');
         $(this).attr('href', href + '&filtro=' + filtro);
-        //return false;
     });
 
     //Evento al cliquear botones que disparan el modal
@@ -19,10 +18,24 @@
         //modal.find('.modal-body input').val(recipient)
     })
 
+    //Evento al ocultar el modal
+    $("#modal-editar").on('hide.bs.modal', function (event) {
+        event.stopPropagation();
+    })
+    
+
     //Evento al cliquear en el boton Guardar para disparar el formularo ajax Post
-    $('#modal-editar-guardar').on('click', function () {        
+    $('#modal-editar-guardar').on('click', function (event) {        
         var form = $("#modal-editar form");
-        form.submit();
+        form.validate();
+        if (form.valid()) {
+            form.submit();
+        }
+        else
+        {
+            event.preventDefault();
+        }
+        
     });
 
     $("#modal-eliminar").on('show.bs.modal', function (event) {
@@ -62,6 +75,7 @@
     });
     
     $('.dropdown-menu a.dropdown-toggle').on('click mouseover', function (e) {
+        e.preventDefault();
         if (!$(this).next().hasClass('show')) {
             $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
         }
@@ -71,10 +85,7 @@
 
         $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function (e) {
             $('.dropdown-submenu .show').removeClass("show");
-        });
-
-
-        return false;
+        });        
     });
 });
 

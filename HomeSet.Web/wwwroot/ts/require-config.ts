@@ -12,9 +12,6 @@ require.config({
         "bootstrap": "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min"
     },
     shim: {
-        'jquery': {
-            exports: '$'
-        },
         'jquery.validate.min': ['jquery'],
         'jquery.unobtrusive-ajax.min': ['jquery'],
         'jquery.validate.unobtrusive': ['jquery', 'jquery.validate.min'],
