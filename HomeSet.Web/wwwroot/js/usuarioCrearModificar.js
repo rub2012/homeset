@@ -1,4 +1,4 @@
-require(["jquery", "jquery.unobtrusive-ajax.min", "jquery.validate.unobtrusive", "rol", "bootstrap"], function ($) {
+require(["jquery", "jquery.unobtrusive-ajax","jquery.validate", "jquery.validate.unobtrusive", "rol", "bootstrap.bundle.min"], function ($) {
     $(document).ready(function () { 
         if ($("#Modificando").val())
         {

@@ -1,22 +1,22 @@
 require.config({
     paths: {
-        "knockout": "../lib/knockout-latest",
-        "jquery": "../lib/jquery.min",
-        "jquery.unobtrusive-ajax.min": "../lib/jquery.unobtrusive-ajax.min",
-        "jquery.validate.min": "../lib/jquery.validate.min",
+        "knockout": "../lib/knockout-latest.debug",
+        "jquery": "../lib/jquery",
+        "jquery.unobtrusive-ajax": "../lib/jquery.unobtrusive-ajax",
+        "jquery.validate": "../lib/jquery.validate",
         "jquery.validate.unobtrusive": "../lib/jquery.validate.unobtrusive",
         "messages_es_AR.min": "../lib/messages_es_AR.min",
-        "bootstrap.min": "../lib/bootstrap.min",
-        "popper.min": "../lib/popper.min",
-        "bootstrap": "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min"
+        "bootstrap": "../lib/bootstrap",
+        "popper": "../lib/popper",
+        "bootstrap.bundle.min": "../lib/bootstrap.bundle.min"
     },
     shim: {
-        'jquery.validate.min': ['jquery'],
-        'jquery.unobtrusive-ajax.min': ['jquery'],
-        'jquery.validate.unobtrusive': ['jquery', 'jquery.validate.min'],
-        'messages_es_AR.min': ['jquery', 'jquery.validate.min'],
-        'bootstrap.min': ['jquery', 'popper.min'],
-        'bootstrap': ['jquery'],
+        'jquery.validate': ['jquery'],
+        'jquery.unobtrusive-ajax': ['jquery'],
+        'jquery.validate.unobtrusive': ['jquery', 'jquery.validate'],
+        'messages_es_AR.min': ['jquery', 'jquery.validate'],
+        'bootstrap': ['jquery', 'popper'],
+        'bootstrap.bundle.min': ['jquery'],
         'knockout': ['jquery']
     }
 });
