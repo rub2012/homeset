@@ -4,8 +4,12 @@
     ViewData["Title"] = "Nuevo Usuario";
 }
 
-<script data-main="js/usuarioCrearModificar" src="~/lib/require.js"></script>
-<script src="~/js/require-config.js" asp-append-version="true"></script>
+<script src="~/lib/jquery.validate.min.js"></script>
+<script src="~/lib/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/knockout-latest.js"></script>
+<script src="~/js/usuarioCrearModificar.js" asp-append-version="true"></script>
+<script src="~/js/rol.js" asp-append-version="true"></script>
+
 
 
 <form asp-controller="Usuario" asp-action="Crear"

@@ -1,7 +1,8 @@
-/// <reference path="usuarioCrearModificar.d.ts"/>
-define(["require", "exports", "knockout"], function (require, exports, ko) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
+{
+    var ko;
+    //import * as ko from "knockout";
+    //import ko = require("knockout");
+    //import { * } from 'knockout';
     //import * as $ from "jquery";
     //import * as util from "Musuario";
     class Rol {
@@ -10,7 +11,6 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             this.nombre = ko.observable(nombre);
         }
     }
-    exports.Rol = Rol;
     class RolViewModel {
         constructor() {
             this.removeRol = (rol) => {
@@ -29,8 +29,7 @@ define(["require", "exports", "knockout"], function (require, exports, ko) {
             $('#rolesFinales').val(ko.toJSON(this.roles));
         }
     }
-    exports.RolViewModel = RolViewModel;
     ko.applyBindings(new RolViewModel());
-});
+}
 //# sourceURL=rol.js
 //# sourceMappingURL=rol.js.map

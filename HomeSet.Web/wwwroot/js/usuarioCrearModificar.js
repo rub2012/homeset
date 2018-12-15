@@ -1,5 +1,4 @@
-require(["jquery", "jquery.unobtrusive-ajax","jquery.validate", "jquery.validate.unobtrusive", "rol", "bootstrap.bundle.min"], function ($) {
-    $(document).ready(function () { 
+$(document).ready(function () { 
         if ($("#Modificando").val())
         {
             $.getJSON("Usuario/ObtenerRoles", { id: $('#Id').val() },
@@ -25,7 +24,6 @@ require(["jquery", "jquery.unobtrusive-ajax","jquery.validate", "jquery.validate
             $("#passwordInput").rules('add', 'required');
         }
     
-    });
 });
 
 function setearDropDownRolSelected()

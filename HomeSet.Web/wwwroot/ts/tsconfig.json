@@ -7,7 +7,14 @@
     "removeComments": false,
     "sourceMap": true,
     "target": "es6",
-    "module": "amd"
+    //"module": "none",
+    //"baseUrl": ".",
+    //"paths": {
+    //  "*": [
+    //    "lib/*"
+    //  ]
+    //},
+    "traceResolution": true
     //"moduleResolution": "node"
   },
   "exclude": [
