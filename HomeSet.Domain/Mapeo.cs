@@ -22,9 +22,11 @@ namespace HomeSet.Domain
             CreateMap<SubCategoriaDto, SubCategoria>();
 
             CreateMap<Rol, RolDto>()
-                .ForMember(x => x.Nombre, x => x.MapFrom(s => s.Name));
+                .ForMember(x => x.Nombre, x => x.MapFrom(s => s.Name))
+                .ForMember(x => x.Id, x => x.MapFrom(s => s.Id));
             CreateMap<RolDto, Rol>()
-                .ForMember(x => x.Name, x => x.MapFrom(s => s.Nombre));
+                .ForMember(x => x.Name, x => x.MapFrom(s => s.Nombre))
+                .ForMember(x => x.Id, x => x.MapFrom(s => s.Id));
 
             CreateMap<Usuario, UsuarioDto>();
             CreateMap<UsuarioDto, Usuario>();

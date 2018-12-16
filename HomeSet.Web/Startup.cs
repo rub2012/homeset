@@ -41,12 +41,12 @@ namespace HomeSet
                 options.Lockout.MaxFailedAccessAttempts = 5;
 
                 // Password settings
-                //options.Password.RequireDigit = true;
-                //options.Password.RequiredLength = 8;
-                //options.Password.RequiredUniqueChars = 2;
-                //options.Password.RequireLowercase = true;
-                //options.Password.RequireNonAlphanumeric = true;
-                //options.Password.RequireUppercase = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequiredUniqueChars = 1;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
             })
                 .AddEntityFrameworkStores<IdentityContext>()
                 .AddDefaultTokenProviders();

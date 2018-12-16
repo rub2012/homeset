@@ -1,18 +1,18 @@
 $(document).ready(function () { 
         if ($("#Modificando").val())
         {
-            $.getJSON("Usuario/ObtenerRoles", { id: $('#Id').val() },
-                function (allData) {
-                    var mappedRoles = $.map(allData, function (item) {
-                        //inhabilito la opcion
-                        $("#rol option[value=" + item.Id + "]").attr('disabled', 'disabled');
-                        setearDropDownRolSelected();
-                        return new Rol(item);
-                    });
-                    //self.roles(mappedRoles);
-                    $('#rolesFinales').val(JSON.stringify(mappedRoles));
-                }
-            );
+            //$.getJSON("Usuario/ObtenerRoles", { id: $('#Id').val() },
+            //    function (allData) {
+            //        var mappedRoles = $.map(allData, function (item) {
+            //            //inhabilito la opcion
+            //            $("#rol option[value=" + item.Id + "]").attr('disabled', 'disabled');
+            //            setearDropDownRolSelected();
+            //            return new Rol(item);
+            //        });
+            //        //self.roles(mappedRoles);
+            //        $('#rolesFinales').val(JSON.stringify(mappedRoles));
+            //    }
+            //);
             $("#userInput").attr('readonly', 'readonly');
             $("#passwordInput").rules('remove', 'required');
             $("#passwordConfirmInput").rules('remove', 'required');

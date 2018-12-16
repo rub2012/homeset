@@ -18,6 +18,12 @@
                 $('#rolesFinales').val(ko.toJSON(this.roles));
             };
             this.roles = ko.observableArray();
+            $.getJSON("Usuario/ObtenerRolesUsuario", { userid: $("#Id").val() }, rolesJson => {
+                var mapped = $.map(rolesJson, function (rol) {
+                    return new Rol(Number(rol.id), String(rol.nombre));
+                });
+                this.roles(mapped);
+            });
         }
         addRol() {
             if ($('#rol option:selected').text() > "") {

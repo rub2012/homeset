@@ -58,22 +58,23 @@ namespace HomeSet.Controllers
             }
             if (ModelState.IsValid)
             {
-                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson);
+                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson ?? "");
                 var user = Mapper.Map<Usuario>(dto);
-                var resultado = await UserManager.CreateAsync(user, dto.Password);
-                foreach (var rol in roles)
-                {
-                    if (await RoleManager.RoleExistsAsync(rol.Nombre))
-                    {
-                        await UserManager.AddToRoleAsync(user, rol.Nombre);
-                    }
-                }
+                var resultado = await UserManager.CreateAsync(user, dto.Password);                
                 if (resultado.Succeeded)
                 {
+                    foreach (var rol in roles)
+                    {
+                        if (await RoleManager.RoleExistsAsync(rol.Nombre))
+                        {
+                            await UserManager.AddToRoleAsync(user, rol.Nombre);
+                        }
+                    }
                     return new AjaxEditSuccessResult();
                 }
                 AddErrors(resultado);
             }
+            CargarRoles();
             return View(dto);
         }        
 
@@ -90,20 +91,10 @@ namespace HomeSet.Controllers
         {
             if (ModelState.IsValid)
             {
-                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson);
-                //var user = new Usuario { UserName = dto.Username, Apellido = dto.Apellido, Nombre = dto.Nombre };
-                //var user = Mapper.Map<Usuario>(dto);
+                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson ?? "");
                 var user = await UserManager.FindByIdAsync(dto.Id.ToString());
                 user.Nombre = dto.Nombre;
                 user.Apellido = dto.Apellido;
-
-                foreach(var rol in roles)
-                {
-                    if (await RoleManager.RoleExistsAsync(rol.Nombre))
-                    {
-                        await UserManager.AddToRoleAsync(user, rol.Nombre);
-                    }
-                }
 
                 if (!string.IsNullOrEmpty(dto.Password))
                 {
@@ -112,16 +103,31 @@ namespace HomeSet.Controllers
                     if (!resultadoReset.Succeeded)
                     {
                         AddErrors(resultadoReset);
+                        CargarRoles();
                         return View(dto);
                     }
                 }
                     var resultado = await UserManager.UpdateAsync(user);
                     if (resultado.Succeeded)
                     {
+                        if (roles.Any())
+                        {
+                            var rolesviejos = await UserManager.GetRolesAsync(user);
+                            rolesviejos = rolesviejos.Except(roles.Select(s => s.Nombre)).ToList();
+                            await UserManager.RemoveFromRolesAsync(user, rolesviejos);
+                        }
+                        foreach (var rol in roles)
+                        {
+                            if (await RoleManager.RoleExistsAsync(rol.Nombre))
+                            {
+                                await UserManager.AddToRoleAsync(user, rol.Nombre);
+                            }
+                        }
                         return new AjaxEditSuccessResult();
                     }
                     AddErrors(resultado);
             }
+            CargarRoles();
             return View(dto);
         }
 
@@ -214,6 +220,23 @@ namespace HomeSet.Controllers
                 return Json(rolesret);
             }
             
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> ObtenerRolesUsuario(int userid)
+        {
+            if (userid == 0)
+            {
+                return Json(null);
+            }
+            else
+            {
+                var usuario = await UserManager.FindByIdAsync(userid.ToString());
+                var rolesString = await UserManager.GetRolesAsync(usuario);
+                var roles = RoleManager.Roles.Where(r => rolesString.Any(s => s.Equals(r.Name))).ToList();
+                return Json(Mapper.Map<IList<RolDto>>(roles));
+            }
+
         }
     }
 }

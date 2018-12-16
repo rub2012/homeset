@@ -1,10 +1,11 @@
 ﻿@model UsuarioDto
-@{ 
+@{
     var Roles = (IEnumerable<SelectListItem>)ViewBag.CargarRoles;
 }
 
 @Html.HiddenFor(model => model.Id)
 @Html.Hidden("Rolesjson", "", new { id = "rolesFinales" })
+
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <div class="form-group">
     <label class="col-sm-2 control-label" asp-for="Nombre"></label>

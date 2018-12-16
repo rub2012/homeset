@@ -19,7 +19,13 @@
     class RolViewModel {
         roles: KnockoutObservableArray<Rol>
         constructor() {
-            this.roles = ko.observableArray()
+            this.roles = ko.observableArray();
+            $.getJSON("Usuario/ObtenerRolesUsuario", { userid: $("#Id").val() }, rolesJson => {
+                var mapped = $.map(rolesJson, function (rol) {
+                    return new Rol(Number(rol.id), String(rol.nombre));
+                });
+                this.roles(mapped);
+            });
         }
 
         addRol(): void {
@@ -37,6 +43,9 @@
             this.roles.remove(rol);
             $('#rolesFinales').val(ko.toJSON(this.roles));
         }
+
+        //Mapear Roles del usuario al modelo
+        //this.roles();
 
     }
 
