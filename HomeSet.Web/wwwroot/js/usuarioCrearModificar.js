@@ -20,7 +20,6 @@ $(document).ready(function () {
         }
         else
         {
-            $('#rolesFinales').val("");
             $("#passwordInput").rules('add', 'required');
         }
     

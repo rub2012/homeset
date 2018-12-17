@@ -37,7 +37,7 @@ namespace HomeSet
             services.AddIdentity<Usuario, Rol>(options => {
                 // Lockout settings
                 options.Lockout.AllowedForNewUsers = true;
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
                 options.Lockout.MaxFailedAccessAttempts = 5;
 
                 // Password settings
@@ -72,7 +72,7 @@ namespace HomeSet
             {
                 services.AddMvc(opts =>
                 {
-                    opts.Filters.Add(new AllowAnonymousFilter());
+                    //opts.Filters.Add(new AllowAnonymousFilter());
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             }

@@ -29,7 +29,6 @@ namespace HomeSet.Controllers
             Mapper = mapper;
         }
 
-        //[ValidateAntiForgeryToken]
         [AjaxOnly]
         [ActionName("Listar")]
         public ActionResult Listar(string filtro, int pagina = 1, string ordenarPor = "Id", DirOrden dirOrden = DirOrden.Asc)
@@ -45,6 +44,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Crear(RolDto dto)
         {
             if (ModelState.IsValid)
@@ -73,6 +73,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Eliminar(int id)
         {
             var rol = await RoleManager.FindByIdAsync(id.ToString());

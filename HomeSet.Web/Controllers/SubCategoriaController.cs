@@ -25,7 +25,6 @@ namespace HomeSet.Controllers
             Negocio = negocio;
         }
 
-        //[ValidateAntiForgeryToken]
         [AjaxOnly]
         [ActionName("Listar")]
         public ActionResult Listar(string filtro, int pagina = 1, string ordenarPor = "Id", DirOrden dirOrden = DirOrden.Asc)
@@ -41,6 +40,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Crear(SubCategoriaDto dto)
         {
             if (ModelState.IsValid)
@@ -58,6 +58,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Modificar(SubCategoriaDto dto)
         {
             if (ModelState.IsValid)
@@ -91,6 +92,7 @@ namespace HomeSet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public IActionResult Eliminar(int id)
         {
             var resultado = Negocio.EliminarSubCategoria(id);

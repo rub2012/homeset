@@ -29,7 +29,10 @@
         }
 
         addRol(): void {
-            if ($('#rol option:selected').text() > "") {
+            if (!isNaN(Number($('#rol option:selected').val())) && ko.utils.arrayFirst(this.roles(),
+                function (rol) {
+                    return Number($('#rol option:selected').val()) == rol.id();
+                }) == null) {
                 this.roles.push(new Rol(Number($('#rol option:selected').val()), $('#rol option:selected').text()));
                 //inhabilito la opcion
                 $("#rol option:selected").attr('disabled', 'disabled');

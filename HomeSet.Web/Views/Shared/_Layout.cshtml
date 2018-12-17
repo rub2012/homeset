@@ -55,8 +55,8 @@
             </button>*@
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">HomeSet</a>
                 </div>
-                @*@if (User.Identity.IsAuthenticated)
-    {*@
+                @if (User.Identity.IsAuthenticated)
+    {
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
@@ -102,18 +102,8 @@
                 </li>
             </ul>
             </div>
-@*}
-else
-{
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" asp-area="" asp-controller="Cuenta" asp-action="Register">Register</a>
-                    </li>
-                </ul>
-            </div>
+}
 
-}*@
             </div>
         </nav>
     </header>

@@ -19,7 +19,7 @@ using Newtonsoft.Json.Linq;
 
 namespace HomeSet.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class UsuarioController : Controller
     {
         private readonly UserManager<Usuario> UserManager;
@@ -58,7 +58,7 @@ namespace HomeSet.Controllers
             }
             if (ModelState.IsValid)
             {
-                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson ?? "");
+                var roles = !string.IsNullOrEmpty(dto.Rolesjson) ? JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson) : new List<RolDto>();
                 var user = Mapper.Map<Usuario>(dto);
                 var resultado = await UserManager.CreateAsync(user, dto.Password);                
                 if (resultado.Succeeded)
@@ -91,7 +91,7 @@ namespace HomeSet.Controllers
         {
             if (ModelState.IsValid)
             {
-                var roles = JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson ?? "");
+                var roles = !string.IsNullOrEmpty(dto.Rolesjson) ? JsonConvert.DeserializeObject<List<RolDto>>(dto.Rolesjson) : new List<RolDto>();
                 var user = await UserManager.FindByIdAsync(dto.Id.ToString());
                 user.Nombre = dto.Nombre;
                 user.Apellido = dto.Apellido;
@@ -110,12 +110,9 @@ namespace HomeSet.Controllers
                     var resultado = await UserManager.UpdateAsync(user);
                     if (resultado.Succeeded)
                     {
-                        if (roles.Any())
-                        {
-                            var rolesviejos = await UserManager.GetRolesAsync(user);
-                            rolesviejos = rolesviejos.Except(roles.Select(s => s.Nombre)).ToList();
-                            await UserManager.RemoveFromRolesAsync(user, rolesviejos);
-                        }
+                        var rolesviejos = await UserManager.GetRolesAsync(user);
+                        rolesviejos = rolesviejos.Except(roles.Select(s => s.Nombre)).ToList();
+                        await UserManager.RemoveFromRolesAsync(user, rolesviejos);
                         foreach (var rol in roles)
                         {
                             if (await RoleManager.RoleExistsAsync(rol.Nombre))
