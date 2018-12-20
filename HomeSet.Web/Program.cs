@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace HomeSet
 {
@@ -10,8 +12,17 @@ namespace HomeSet
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-           WebHost.CreateDefaultBuilder(args)
-               .UseStartup<Startup>();
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            var config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("hosting.json", optional: true)
+            .Build();
+
+            return WebHost.CreateDefaultBuilder(args)
+                .UseConfiguration(config)
+                .UseStartup<Startup>();
+        }
+           
     }
 }
