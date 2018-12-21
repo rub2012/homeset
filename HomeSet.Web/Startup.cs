@@ -75,7 +75,11 @@ namespace HomeSet
             }
             else
             {
-                services.AddMvc()
+                //services.AddMvc()
+                services.AddMvc(opts =>
+                {
+                    opts.Filters.Add(new AllowAnonymousFilter());
+                })
                     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             }            
             //services.AddDataProtection()
