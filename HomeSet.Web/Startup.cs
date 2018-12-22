@@ -69,18 +69,14 @@ namespace HomeSet
             {
                 services.AddMvc(opts =>
                 {
-                    opts.Filters.Add(new AllowAnonymousFilter());
+                    //opts.Filters.Add(new AllowAnonymousFilter());
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             }
             else
             {
-                //services.AddMvc()
-                services.AddMvc(opts =>
-                {
-                    opts.Filters.Add(new AllowAnonymousFilter());
-                })
-                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                services.AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             }            
             //services.AddDataProtection()
             //    .SetDefaultKeyLifetime(TimeSpan.FromDays(14))
