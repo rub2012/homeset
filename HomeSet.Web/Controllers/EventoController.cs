@@ -42,7 +42,7 @@ namespace HomeSet.Controllers
 
             
             //ViewBag.Items = new ListaPaginada<EventoDto>(eventos, 1, 10, 10);
-            return View(ListQuery("", 1, "Id", DirOrden.Asc));
+            return View(ListQuery("", 1, "Fecha", DirOrden.Desc));
         }
 
         [HttpPost]

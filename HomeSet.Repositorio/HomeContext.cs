@@ -93,7 +93,7 @@ namespace HomeSet.Repositorio
 
             if (paginacion.OrdenarPor != null)
             {
-                resultados.OrderBy<TEntity>(paginacion.OrdenarPor, paginacion.DireccionOrden == DirOrden.Asc);
+                resultados = resultados.OrderBy<TEntity>(paginacion.OrdenarPor, paginacion.DireccionOrden == DirOrden.Asc);
             }
 
             resultados = resultados.Skip((paginacion.Pagina - 1) * paginacion.ItemsPorPagina).Take(paginacion.ItemsPorPagina);
